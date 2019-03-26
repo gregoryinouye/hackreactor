@@ -161,14 +161,18 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    var result = 0;
-    if (accumulator === undefined) {
-      _.each(collection, function(memo, value, key, list) {
-
-      })
-    } else {
-
-    }
+    var result = accumulator;
+    var callCount = 0;
+    _.each(collection, function(element, index, list) {
+      if (result === undefined && callCount === 0) {
+        result = element;
+        callCount++;
+      } else {
+        result = iterator(result, element, index, list);
+        callCount++;
+      }
+    });
+    return result;
   };
 
   // Determine if the array or object contains a given value (using `===`).
