@@ -361,12 +361,13 @@
         expect(uniqueNumbers).to.not.equal(numbers);
       });
       
-      it('should maintain same array length', function() {
-        var numbers = [1, 1, 2, 3];
-        var shuffled = _.shuffle(numbers);
+      // THIS TEST BELONGS IN _.SHUFFLE in part2.js
+      // it('should maintain same array length', function() {
+      //   var numbers = [1, 1, 2, 3];
+      //   var shuffled = _.shuffle(numbers);
 
-        expect(shuffled.length).to.equal(numbers.length);
-      });
+      //   expect(shuffled.length).to.equal(numbers.length);
+      // });
     });
 
     describe('map', function() {
