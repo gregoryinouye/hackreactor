@@ -196,8 +196,9 @@
     		return false;
     	} else if (iterator) {
     		return Boolean(iterator(item));
+    	} else {
+    		return Boolean(item);
     	}
-    	return Boolean(item);
     }, true);
   };
 
@@ -205,6 +206,13 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    return !_.every(collection, function(element) {
+    	if (iterator) {
+    		return !Boolean(iterator(element));
+    	} else {
+    		return !Boolean(element);
+    	}
+    });
   };
 
 
