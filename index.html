@@ -11,14 +11,23 @@
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+
+        // display tweets
+        // does not continue to update, just counts at initialization
+        var lastTweetCount;
+
+        var totalTweetCount = streams.home.length - 1;
+
+        var getTweets = function(numTweets) {
+          while(numTweets >= 0){
+            var tweet = streams.home[numTweets];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($body);
+            numTweets -= 1;
+        }}
+
+        getTweets(totalTweetCount);
 
       });
 
