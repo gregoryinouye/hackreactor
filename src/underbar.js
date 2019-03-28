@@ -342,7 +342,7 @@
   	var input = array.slice();
   	var output = [];
   	while (input.length > 0) {
-  		output.push(input.splice(Math.floor(Math.random() * Math.floor(input.length)), 1)[0]);
+  		output.push(input.splice(Math.floor(Math.random() * input.length), 1)[0]);
   	}
   	return output;
   };
