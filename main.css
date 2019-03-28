@@ -63,11 +63,28 @@ header, h1 {
   padding-bottom: 20px;
 }
 
+h1 a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
 /*
 
 BODY
 
 */
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
 
 body {
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -111,8 +128,6 @@ DIV TWEET
 */
 
 .tweet {
-  border: 1px solid black;
-  border-radius: 5px;
   padding: 10px;
   margin: 5px;
 }

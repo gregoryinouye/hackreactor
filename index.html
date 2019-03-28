@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <h1><a href="index.html" style="text-decoration: none; color: black">TWIDDLER</a></h1>
+      <h1><a href="index.html">TWIDDLER</a></h1>
     </header>
     <article>
       <script>
@@ -17,17 +17,24 @@
         $(document).ready(function(){
           var $article = $('article');
           $article.html('');
+          var $aside = $('aside');
+          $aside.html('');
 
           var displayedTweetIndex = -1;
 
           var newestTweetIndex;
+
+          // when username is clicked, display user tweet history in aside
+          var showUserTimeline = function(username) {
+
+          };
 
           var getTweets = function(startTweet, endTweet) {
             for (var i = startTweet + 1; i <= endTweet; i++) {
               var tweet = streams.home[i];
               var timeStamp = streams.home[i]['created_at'].toLocaleTimeString();
               var $tweet = $('<div class=tweet></div>');
-              $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + timeStamp);
+              $tweet.html(`<button type="button" onclick="showUserTimeline(${tweet.user});">` + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + timeStamp);
               $tweet.prependTo($article);
           }};
 
@@ -39,13 +46,13 @@
             }
           };
 
+          $( 'a' ).click(function( event ) {
+            console.log( 'clicked', $( this ).text() );
+          });
+
           updateTweets();
 
           setInterval(updateTweets, 1500);
-
-          var createLink = function(text) {
-            var $link = $('<a href=')
-          };
 
         });
 
