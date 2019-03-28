@@ -16,17 +16,16 @@
         // does not continue to update, just counts at initialization
         var displayedTweetIndex = -1;
 
-        var newestTweetIndex = streams.home.length - 1;
+        var newestTweetIndex;
 
         var getTweets = function(startTweet, endTweet) {
           for (var i = startTweet + 1; i <= endTweet; i++) {
             var tweet = streams.home[i];
+            var timeStamp = streams.home[i]['created_at'];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + timeStamp);
             $tweet.prependTo($body);
         }};
-
-        getTweets(0, newestTweetIndex);
 
         var updateTweets = function() {
           newestTweetIndex = streams.home.length - 1;
@@ -36,6 +35,8 @@
             displayedTweetIndex = newestTweetIndex;
           }
         }
+
+        updateTweets();
 
         setInterval(updateTweets, 1500);
 
