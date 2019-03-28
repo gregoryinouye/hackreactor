@@ -3,45 +3,55 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <title>HR@G: Twiddler</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   </head>
   <body>
-    <script>
+    <header>
+      <h1><a href="index.html" style="text-decoration: none; color: black">TWIDDLER</a></h1>
+    </header>
+    <article>
+      <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        $(document).ready(function(){
+          var $article = $('article');
+          $article.html('');
 
+          var displayedTweetIndex = -1;
 
-        // display tweets
-        // does not continue to update, just counts at initialization
-        var displayedTweetIndex = -1;
+          var newestTweetIndex;
 
-        var newestTweetIndex;
+          var getTweets = function(startTweet, endTweet) {
+            for (var i = startTweet + 1; i <= endTweet; i++) {
+              var tweet = streams.home[i];
+              var timeStamp = streams.home[i]['created_at'].toLocaleTimeString();
+              var $tweet = $('<div class=tweet></div>');
+              $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + timeStamp);
+              $tweet.prependTo($article);
+          }};
 
-        var getTweets = function(startTweet, endTweet) {
-          for (var i = startTweet + 1; i <= endTweet; i++) {
-            var tweet = streams.home[i];
-            var timeStamp = streams.home[i]['created_at'];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + timeStamp);
-            $tweet.prependTo($body);
-        }};
+          var updateTweets = function() {
+            newestTweetIndex = streams.home.length - 1;
+            if (newestTweetIndex !== displayedTweetIndex) {
+              getTweets(displayedTweetIndex, newestTweetIndex);
+              displayedTweetIndex = newestTweetIndex;
+            }
+          };
 
-        var updateTweets = function() {
-          newestTweetIndex = streams.home.length - 1;
-          if (newestTweetIndex !== displayedTweetIndex) {
-            // update tweets
-            getTweets(displayedTweetIndex, newestTweetIndex);
-            displayedTweetIndex = newestTweetIndex;
-          }
-        }
+          updateTweets();
 
-        updateTweets();
+          setInterval(updateTweets, 1500);
 
-        setInterval(updateTweets, 1500);
+          var createLink = function(text) {
+            var $link = $('<a href=')
+          };
 
-      });
+        });
 
-    </script>
+      </script>
+    </article>
+    <aside>
+    </aside>
   </body>
 </html>
