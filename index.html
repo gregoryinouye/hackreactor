@@ -14,20 +14,30 @@
 
         // display tweets
         // does not continue to update, just counts at initialization
-        var lastTweetCount;
+        var displayedTweetIndex = -1;
 
-        var totalTweetCount = streams.home.length - 1;
+        var newestTweetIndex = streams.home.length - 1;
 
-        var getTweets = function(numTweets) {
-          while(numTweets >= 0){
-            var tweet = streams.home[numTweets];
+        var getTweets = function(startTweet, endTweet) {
+          for (var i = startTweet + 1; i <= endTweet; i++) {
+            var tweet = streams.home[i];
             var $tweet = $('<div></div>');
             $tweet.text('@' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($body);
-            numTweets -= 1;
-        }}
+            $tweet.prependTo($body);
+        }};
 
-        getTweets(totalTweetCount);
+        getTweets(0, newestTweetIndex);
+
+        var updateTweets = function() {
+          newestTweetIndex = streams.home.length - 1;
+          if (newestTweetIndex !== displayedTweetIndex) {
+            // update tweets
+            getTweets(displayedTweetIndex, newestTweetIndex);
+            displayedTweetIndex = newestTweetIndex;
+          }
+        }
+
+        setInterval(updateTweets, 1500);
 
       });
 
