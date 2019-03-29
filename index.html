@@ -24,7 +24,8 @@
 
           var newestTweetIndex;
 
-          var showUserTimeline = function(username) {
+          var showUserTimeline = function(atUsername) {
+            username = atUsername.slice(1);
             for (var i = 0; i <= streams.users[username].length; i++) {
               var tweet = streams.users[username][i];
               var timeStamp = streams.users[username][i].created_at.toLocaleTimeString();
@@ -38,7 +39,7 @@
               var tweet = streams.home[i];
               var timeStamp = streams.home[i].created_at.toLocaleTimeString();
               var $tweet = $('<div class=tweet></div>');
-              $tweet.html(`<button type="button" onclick="showUserTimeline(${tweet.user});">` + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + timeStamp);
+              $tweet.html('<button type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + timeStamp);
               $tweet.prependTo($article);
           }};
 
@@ -50,8 +51,8 @@
             }
           };
 
-          $( 'a' ).click(function( event ) {
-            console.log( 'clicked', $( this ).text() );
+          $('body').on('click', 'button', function( event ) {
+            showUserTimeline( $( this ).text() );
           });
 
           updateTweets();

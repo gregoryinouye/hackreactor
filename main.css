@@ -84,6 +84,11 @@ button {
   vertical-align: baseline;
   background: rgba(0, 0, 0, 0);
   cursor: pointer;
+  text-decoration: underline;
+}
+
+button:hover {
+  color: gray;
 }
 
 body {
@@ -107,7 +112,6 @@ article {
   padding-right: 15px;
   float: left;
 }
-
 
 /*
 
