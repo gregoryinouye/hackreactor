@@ -23,8 +23,10 @@ var stringifyJSON = function(obj) {
   		// work on object
   	  return 'THIS SHOULD RETURN OBJECT';
   	}
-  } else if (['boolean', 'number', 'string'].includes(typeof obj)) {
+  } else if (['boolean', 'number'].includes(typeof obj)) {
   	return obj.toString();
+  } else if (typeof obj === 'string') {
+  	return `${obj}`;
   } else if (['function', 'symbol', 'undefined'].includes(typeof obj)) {
   	return undefined;
   } 
@@ -35,11 +37,11 @@ var stringifyObject = function(obj) {
 }
 
 var stringifyArray = function(arr) {
-  return arr.reduce(function(accumulator, currentValue, currentIndex) {
+  return arr.reduce(function(output, currentValue, currentIndex) {
   	if (currentIndex === 0) {
-  		return accumulator + stringifyJSON(currentValue);
+  		return output + stringifyJSON(currentValue);
   	} else {
-  		return accumulator + ',' + stringifyJSON(currentValue);
+  		return output + ',' + stringifyJSON(currentValue);
   	}
   }, '[') + ']';
 }
