@@ -26,7 +26,7 @@ var stringifyJSON = function(obj) {
   } else if (['boolean', 'number'].includes(typeof obj)) {
   	return obj.toString();
   } else if (typeof obj === 'string') {
-  	return `${obj}`;
+  	return `\"${obj}\"`;
   } else if (['function', 'symbol', 'undefined'].includes(typeof obj)) {
   	return undefined;
   } 
