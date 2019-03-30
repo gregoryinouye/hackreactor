@@ -45,9 +45,9 @@ var stringifyObject = function(obj) {
   var objProps = Object.entries(obj);
   return objProps.reduce(function(output, currentValue, currentIndex) {
   	if (currentIndex === 0) {
-  		return output + currentValue[0] + ":" + stringifyJSON(currentValue);
+  		return output + `"${currentValue[0]}"` + ":" + stringifyJSON(currentValue[1]);
   	} else {
-  		return output + ',' + currentValue[0] + ":" + stringifyJSON(currentValue);
+  		return output + ',' + `"${currentValue[0]}"` + ":" + stringifyJSON(currentValue[1]);
   	}
   }, '{') + '}';
 }
