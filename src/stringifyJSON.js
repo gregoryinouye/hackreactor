@@ -43,21 +43,19 @@ var stringifyJSON = function(obj) {
 
 var stringifyObject = function(obj) {
   var objProps = Object.entries(obj);
-  return objProps.reduce(function(output, currentValue, currentIndex) {
-  	if (currentIndex === 0) {
-  		return output + `"${currentValue[0]}"` + ":" + stringifyJSON(currentValue[1]);
+  return objProps.reduce(function(output, currentValue) {
+  	output = output.length === 1 ? output : output + ',';
+  	if (stringifyJSON(currentValue[1])) {
+  	  return output + `"${currentValue[0]}"` + ":" + stringifyJSON(currentValue[1]);
   	} else {
-  		return output + ',' + `"${currentValue[0]}"` + ":" + stringifyJSON(currentValue[1]);
-  	}
-  }, '{') + '}';
+  	  return output;
+  	  }
+  	}, '{') + '}';
 }
 
 var stringifyArray = function(arr) {
-  return arr.reduce(function(output, currentValue, currentIndex) {
-  	if (currentIndex === 0) {
-  		return output + stringifyJSON(currentValue);
-  	} else {
-  		return output + ',' + stringifyJSON(currentValue);
-  	}
+  return arr.reduce(function(output, currentValue) {
+  	output = output.length === 1 ? output : output + ',';
+  	return output + stringifyJSON(currentValue);
   }, '[') + ']';
 }
