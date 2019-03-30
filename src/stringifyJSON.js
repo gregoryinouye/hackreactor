@@ -18,10 +18,10 @@ var stringifyJSON = function(obj) {
   	if (obj === null) {
   		return 'null';
   	} else if (Array.isArray(obj)) {
-  		// work on array
-  		// return '[' + stringifyJSON()
+  	  stringifyArray(obj);
   	} else {
   		// work on object
+  	  return 'THIS SHOULD RETURN OBJECT';
   	}
   } else if (['boolean', 'number', 'string'].includes(typeof obj)) {
   	return obj.toString();
@@ -35,5 +35,11 @@ var stringifyObject = function(obj) {
 }
 
 var stringifyArray = function(arr) {
-
+  return arr.reduce(function(accumulator, currentValue, currentIndex) {
+  	if (currentIndex === 0) {
+  		return accumulator + stringifyJSON(currentValue);
+  	} else {
+  		return accumulator + ',' + stringifyJSON(currentValue);
+  	}
+  }, '[') + ']';
 }
