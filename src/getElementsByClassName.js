@@ -21,15 +21,15 @@ document.appendChild(element)
 var getElementsByClassName = function(className) {
   var output = [];
   var node = arguments.length === 1 ? document.body : arguments[1];
+  if (Array.from(node.classList).includes(className)) {
+    output = output.concat(node);
+  }
   if (node.hasChildNodes()) {
     for (var i = 0; i < node.childNodes.length; i++) {
       if (node.childNodes[i].nodeName !== '#text') {
-        output.concat(getElementsByClassName(className, node.childNodes[i]));
+        output = output.concat(getElementsByClassName(className, node.childNodes[i]));
       }
     }
-  }
-  if (Array.from(node.classList).includes(className)) {
-    output.concat(node.nodeName);
   }
   return output;
 };
