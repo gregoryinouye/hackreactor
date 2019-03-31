@@ -7,9 +7,9 @@
 
 /*
 
-The getElementsByClassName method of Document interface returns an array-like object of all child elements which have all of the given class names. When called on the document object, the complete document is searched, including the root node. You may also call getElementsByClassName() on any element; it will return only elements which are descendants of the specified root element with the given class names.
+The getElementsByClassName method of Document interface returns an array-like object of all child elements which have all of the given class names. When called on the document object, the complete document is searched, including the root node. You may also call getElementsByClassName() on any element; it will return only elements which are descendants of the specified root element with the given class names
 
-document.body -> rep body node of the current document
+document.body -> returns body node of the current document
 element.childNodes -> returns live NodeList of child nodes of given element
 element.classList -> returns live DOMTokenList of class attributes of the element
 
@@ -20,23 +20,29 @@ document.appendChild(element)
 
 var getElementsByClassName = function(className) {
   var output = [];
-  output.push(getClassChildren(Array.from(document.body), className));
+  var node = arguments.length === 1 ? document.body : arguments[1];
+  if (node.hasChildNodes()) {
+    for (var i = 0; i < node.childNodes.length; i++) {
+      if (node.childNodes[i].nodeName !== '#text') {
+        output.concat(getElementsByClassName(className, node.childNodes[i]));
+      }
+    }
+  }
+  if (Array.from(node.classList).includes(className)) {
+    output.concat(node.nodeName);
+  }
   return output;
 };
 
-var getClassChildren = function(arr, className) {
-  return arr.reduce(function(accumulator, currentValue) {
-    if (currentValue.hasChi bldNodes()) {
-      return getClassChildren(currentValue);
-    } else {
-      Array.from(element.classList).includes(className) ? currentValue.nodeName;
-    }
-  }, []);
-}
+// if (currentValue.hasChildNodes()) {
+//   return Array.from(currentValue.classList).includes(className) ? [currentValue.nodeName].push(getClassChildren(currentValue)) : getClassChildren(currentValue);
+// } else {
+//   return Array.from(currentValue.classList).includes(className) ? currentValue.nodeName : undefined;
+// }}
 
 // get document.body
-// get all child nodes
-// check each node for class - if match keep, if no match discard (element.remove() or element.removeChild(node))
+// check if there are children nodes, if child node exists, run recusive case
+// if no child nodes, run end case
 // for each element, search all child elements for specified class
 // return all elements belonging to specified class
 // write returns togther for final output
