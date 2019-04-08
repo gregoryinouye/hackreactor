@@ -3,10 +3,8 @@
 
 // but you don't so you're going to write it from scratch:
 
-var stringifyJSON = function(obj) {
-  if (typeof obj === 'boolean' || typeof obj === 'number') {
-    return obj.toString();
-  } else if (obj === null) {
+var stringifyJSON = function(obj) { 
+  if (obj === null || typeof obj === 'boolean' || typeof obj === 'number') {
     return '' + obj;
   } else if (typeof obj === 'string') {
     return '"' + obj + '"';
@@ -31,7 +29,7 @@ var stringifyJSON = function(obj) {
         } else {
           str += '"' + keys + '":' + val + ',';
         }
-      size--;
+        size--;
       }
     }
     return str + '}';
