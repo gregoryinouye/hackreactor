@@ -24,12 +24,15 @@ var stringifyJSON = function(obj) {
     let str = '{';
     let size = Object.keys(obj).length - 1;
     for (let keys in obj) {
-      if (size === 0) {
-        str += '"' + keys + '":' + stringifyJSON(obj[keys]);
-    } else {
-        str += '"' + keys + '":' + stringifyJSON(obj[keys]) + ',';
-    }
+      let val = stringifyJSON(obj[keys]);
+      if (val !== '') {
+        if (size === 0) {
+          str += '"' + keys + '":' + val;
+        } else {
+          str += '"' + keys + '":' + val + ',';
+        }
       size--;
+      }
     }
     return str + '}';
   } else {
