@@ -342,12 +342,6 @@
         expect(uniqueNumbers).to.not.equal(numbers);
       });
       
-      it('should maintain same array length', function() {
-        var numbers = [1, 1, 2, 3];
-        var shuffled = _.shuffle(numbers);
-
-        expect(shuffled.length).to.equal(numbers.length);
-      });
     });
 
     describe('map', function() {
@@ -383,7 +377,9 @@
       });
 
       it('should apply a function to every value in an array', function() {
-        var multiplyByTwo = FILL_ME_IN;
+        var multiplyByTwo = function (item) {
+          return item * 2;
+        };
 
         expect(_.map([1, 2, 3], multiplyByTwo)).to.eql([2, 4, 6]);
       });
@@ -406,7 +402,7 @@
           { name: 'curly', age: 50 }
         ];
 
-        expect(_.pluck(people, 'name')).to.FILL_ME_IN(['moe', 'curly']);
+        expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
       });
 
       it('should not modify the original array', function() {
@@ -417,7 +413,7 @@
 
         _.pluck(people, 'name');
 
-        expect(people).to.FILL_ME_IN([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
+        expect(people).to.eql([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
       });
     });
 
