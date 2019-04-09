@@ -160,11 +160,12 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    if (!accumulator) {
+    if (accumulator === undefined) {
       accumulator = collection[0];
       collection = collection.slice(1, collection.length);
     }
-    _.each(collection, function(accumulator, element){
+    // debugger;
+    _.each(collection, function(element) {
       accumulator = iterator(accumulator, element);
     });
     return accumulator;
@@ -184,14 +185,19 @@
 
 
   // Determine whether all of the elements match a truth test.
-  _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
+  _.every = function(collection, iterator = _.identity) {
+    return _.reduce(collection, function(areTrue, element) {
+      return areTrue && !!iterator(element);
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
+  _.some = function(collection, iterator = _.identity) {
     // TIP: There's a very clever way to re-use every() here.
+    return !_.every(collection, function(element) {
+      return !iterator(element);
+    });
   };
 
 
@@ -214,11 +220,25 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for (let i = 1; i < arguments.length; i++) {
+      _.each(arguments[i], function(element, keys) {
+        obj[keys] = element;
+      });
+    }
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for (let i = 1; i < arguments.length; i++) {
+      _.each(arguments[i], function(element, keys) {
+        if (obj[keys] === undefined) {
+          obj[keys] = element;
+        }
+      });
+    }
+    return obj;
   };
 
 
@@ -262,6 +282,14 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    let argAndResultObj = {};
+    return function(arg) {
+      if (argAndResultObj[JSON.stringify(arg)] === undefined) {
+        argAndResultObj[JSON.stringify(arg)] = func.apply(this, arguments);
+      } else {
+        return argAndResultObj[JSON.stringify(arg)];
+      }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
