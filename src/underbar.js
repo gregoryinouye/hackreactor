@@ -283,12 +283,12 @@
   // instead if possible.
   _.memoize = function(func) {
     let argAndResultObj = {};
-    return function(arg) {
-      if (argAndResultObj[JSON.stringify(arg)] === undefined) {
-        argAndResultObj[JSON.stringify(arg)] = func.apply(this, arguments);
-      } else {
-        return argAndResultObj[JSON.stringify(arg)];
+    return function(...arg) {
+      let argString = JSON.stringify(arg);
+      if (argAndResultObj[argString] === undefined) {
+        argAndResultObj[argString] = func.apply(this, arguments);
       }
+      return argAndResultObj[argString];
     };
   };
 
@@ -298,7 +298,10 @@
   // The arguments for the original function are passed after the wait
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
-  _.delay = function(func, wait) {
+  _.delay = function(func, wait, ...theArgs) {
+    return setTimeout(function() {
+      return func.apply(this, theArgs);
+    }, wait);
   };
 
 
