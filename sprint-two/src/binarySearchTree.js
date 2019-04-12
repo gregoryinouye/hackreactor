@@ -19,11 +19,7 @@ binaryTreeMethods.insert = function(value, node = this) {
     node.left === null ? node.left = BinarySearchTree(value) : node.insert(value, node.left);
   } else if (node.value < value) {
     node.right === null ? node.right = BinarySearchTree(value) : node.insert(value, node.right);
-  }
-  // recursive case - there is a child in target direction
-  // base case - there is no child in target direction
-     // add newtree to target direction
-  
+  }  
 };
 
 binaryTreeMethods.contains = function(target) {
@@ -36,8 +32,6 @@ binaryTreeMethods.contains = function(target) {
   });
   
   return result;
-  
-  
   
   // recursive - current node !== target, has child in target direction
   
@@ -61,4 +55,7 @@ binaryTreeMethods.depthFirstLog = function(cb, node = this) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert() - O(1) / O(n)
+ contains() - O(1) / O(n)
+ depthFirstLog() - O(1) / O(n)
  */

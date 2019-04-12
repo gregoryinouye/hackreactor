@@ -30,6 +30,13 @@ describe('linkedList', function() {
     linkedList.removeHead();
     expect(linkedList.head.value).to.equal(5);
   });
+  
+  it('should update the tail from the list when removeHead is called on a list with only one item', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.head.value).to.equal(4);
+    linkedList.removeHead();
+    expect(linkedList.tail).to.equal(null);
+  });
 
   it('should return the value of the former head when removeHead is called', function() {
     linkedList.addToTail(4);

@@ -15,6 +15,12 @@ describe('tree', function() {
     tree.addChild(5);
     expect(tree.children[0].value).to.equal(5);
   });
+  
+  it('should add children of duplicate values to the tree', function() {
+    tree.addChild(5);
+    tree.addChild(5);
+    expect(tree.children.length).to.equal(2);
+  });
 
   it('should return true for a value that the tree contains', function() {
     tree.addChild(5);

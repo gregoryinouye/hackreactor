@@ -10,12 +10,14 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
-    // edge case: if only one item in list (tail = head), need to update list.tail
     if (list.head === null) {
       return null;
     }
     var currentHead = list.head;
     list.head = currentHead.next;
+    if (list.head === null) {
+      list.tail = null;
+    }
     return currentHead.value;
   };
 
