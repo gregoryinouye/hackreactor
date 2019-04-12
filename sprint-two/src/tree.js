@@ -3,7 +3,6 @@ var Tree = function(value) {
   
   newTree.value = value;
   newTree.children = [];
-    // fix me
   for (var key in treeMethods) {
     newTree[key] = treeMethods[key];
   }
