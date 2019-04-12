@@ -22,16 +22,11 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   var graph = this;
-  //iterate through all nodes
-  
-  // check if node to remove is in the current node edge list
-  //   if so, remove edges
-  
-  // forEachNode(function(nodeName) {
-  //   if (graph[nodeName].edges.indexOf(node) >= 0) {
-  //     graph[nodeName].edges.splice(graph[nodeName].edges.indexOf(node), 1);
-  //   }
-  // });
+  this.forEachNode(function(nodeName) {
+    if (graph[nodeName].edges.indexOf(node) >= 0) {
+      graph[nodeName].edges.splice(graph[nodeName].edges.indexOf(node), 1);
+    }
+  });
   delete this[node];
 };
 
