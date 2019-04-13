@@ -25,6 +25,8 @@ HashTable.prototype.insert = function(k, v) {
     });
   } else {
     storageBucket.push([k, v]);
+    this._counter++;
+    this.resizeChecker();
   }
 };
 
