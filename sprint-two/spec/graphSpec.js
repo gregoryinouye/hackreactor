@@ -53,6 +53,12 @@ describe('graph', function() {
     graph.removeNode(5);
     expect(graph.hasEdge(4, 5)).to.equal(false);
   });
+  
+  it('forEachNode should not throw an error if Graph is empty', function() {
+    graph.addNode(5);
+    graph.removeNode(5);
+    expect(graph.forEachNode(_.identity)).to.equal(undefined);
+  });
 
   it('should execute a callback on each node in the graph', function() {
     var connectToFive = function(item) {

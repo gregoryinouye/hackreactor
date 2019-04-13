@@ -10,6 +10,15 @@ describe('binarySearchTree', function() {
     expect(binarySearchTree.contains).to.be.a('function');
     expect(binarySearchTree.depthFirstLog).to.be.a('function');
   });
+  
+  it('should not add duplicate values', function() {
+    var counter = 0;
+    var func = function() { counter++; };
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(3);
+    binarySearchTree.depthFirstLog(func);
+    expect(counter).to.equal(2);
+  });
 
   it('should insert values at the correct location in the tree', function() {
     binarySearchTree.insert(2);
