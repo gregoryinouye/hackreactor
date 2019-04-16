@@ -20,7 +20,15 @@ SlidyDancer.prototype.step = function() {
 
   //make dancer slide
   // this.$node.animate({left: '+= 250px'}).fadeOut().fadeIn();animate({right: '+=250px'});
-  this.$node.animate({left: '+=20px'}).animate({right: '-=20px'}).animate({top: '+=10px'});
+  this.$node.animate({left: '+=50px'}).animate({right: '-=50px'}).animate({top: '+=20px'});
+
+  // this.$node.stop(true,true).animate({left: 500}, 5000, function() {
+  //   this.$node.stop(true,true).animate({left: 100}, 5000);
+  // });
+
+//window.length
+//window offsets
+
 
   // this.$node.slideToggle('fast', 'swing');
 
