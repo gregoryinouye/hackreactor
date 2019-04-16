@@ -35,3 +35,6 @@ body, a:link, a:visited, a:active{
 .rollydancer{
   border:10px solid green;
 }
+.lineupdancer{
+  float: left;
+}

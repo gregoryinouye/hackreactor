@@ -8,6 +8,7 @@ var BlinkyDancer = function(top, left, timeBetweenSteps) {
   this.timeBetweenSteps = timeBetweenSteps;
   Dancer.apply(this, arguments);
   this.$node.addClass('blinkydancer');
+  window.dancers.push(this);
   // return blinkyDancer;
 };
 
