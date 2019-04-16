@@ -5,6 +5,7 @@ var Dancer = function(top, left, timeBetweenSteps) {
 
   // use jQuery to create an HTML <span> tag
   this.$node = $('<span class="dancer"></span>');
+  this.timeBetweenSteps = timeBetweenSteps;
 
   // call is not necessary here b/c Dancer.apply is used in subclasses
   this.step();
@@ -19,8 +20,7 @@ var Dancer = function(top, left, timeBetweenSteps) {
 Dancer.prototype.step = function() {
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
-  console.log(this)
-  setTimeout(this.step.bind(this), timeBetweenSteps);
+  setTimeout(this.step.bind(this), this.timeBetweenSteps);
 };
 
 Dancer.prototype.setPosition = function(top, left) {
