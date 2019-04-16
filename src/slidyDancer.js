@@ -2,6 +2,7 @@ var SlidyDancer = function(top, left, timeBetweenSteps) {
   this.oldStep = Dancer.prototype.step.bind(this);
   this.timeBetweenSteps = timeBetweenSteps;
   Dancer.apply(this, arguments);
+  this.$node.addClass('slidydancer');
 };
 
 SlidyDancer.prototype = Object.create(Dancer.prototype);
