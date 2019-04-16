@@ -1,8 +1,13 @@
 var RollyDancer = function(top, left, timeBetweenSteps) {
-  var oldStep = this.step;
+  this.oldStep = Dancer.prototype.step.bind(this);
+  this.timeBetweenSteps = timeBetweenSteps;
+  Dancer.apply(this, arguments);
+
 };
+RollyDancer.prototype = Object.create(Dancer.prototype);
+RollyDancer.prototype.constructor = RollyDancer;
 
 RollyDancer.prototype.step = function() {
-  oldStep();
+  this.oldStep();
   // do rolling animation
 };
