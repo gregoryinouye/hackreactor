@@ -27,7 +27,7 @@ body, a:link, a:visited, a:active{
   position: absolute;
 }
 .blinkydancer{
-  border:10px solid blue;
+  border:0px;
 }
 .slidydancer{
   border:0px;

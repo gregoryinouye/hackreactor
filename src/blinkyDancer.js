@@ -7,8 +7,9 @@ var BlinkyDancer = function(top, left, timeBetweenSteps) {
   this.oldStep = Dancer.prototype.step.bind(this);
   this.timeBetweenSteps = timeBetweenSteps;
   Dancer.apply(this, arguments);
-  this.$node.addClass('blinkydancer');
-  window.dancers.push(this);
+  this.$node = $('<img src="ghost.png" class="dancer blinkydancer">');
+  this.setPosition(top, left);
+  //window.dancers.push(this);
   // return blinkyDancer;
 };
 
