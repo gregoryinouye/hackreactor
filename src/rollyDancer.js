@@ -11,5 +11,4 @@ RollyDancer.prototype.constructor = RollyDancer;
 
 RollyDancer.prototype.step = function() {
   this.oldStep();
-  // do rolling animation
 };

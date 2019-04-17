@@ -9,9 +9,13 @@ var BlinkyDancer = function(top, left, timeBetweenSteps) {
   Dancer.apply(this, arguments);
   this.$node = $('<img src="ghost.png" class="dancer blinkydancer">');
   this.setPosition(top, left);
-  //window.dancers.push(this);
-  // return blinkyDancer;
-};
+  this.$node.mouseover(function() {
+    $(this).animate({'left': '+=250px'});
+  });
+  this.$node.mouseout(function() {
+    $(this).animate({'left': '-=250px'});
+  });
+}
 
 BlinkyDancer.prototype = Object.create(Dancer.prototype);
 BlinkyDancer.prototype.constructor = BlinkyDancer;
@@ -23,5 +27,5 @@ BlinkyDancer.prototype.step = function() {
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
-  this.$node.toggle();
+  // this.$node.toggle();
 };
