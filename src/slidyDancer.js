@@ -2,7 +2,8 @@ var SlidyDancer = function(top, left, timeBetweenSteps) {
   this.oldStep = Dancer.prototype.step.bind(this);
   this.timeBetweenSteps = timeBetweenSteps;
   Dancer.apply(this, arguments);
-  this.$node.addClass('slidydancer');
+  this.$node = $('<img src="poo.png" class="dancer slidydancer">');
+  this.setPosition(top, left);
 };
 
 SlidyDancer.prototype = Object.create(Dancer.prototype);
@@ -21,7 +22,7 @@ SlidyDancer.prototype.step = function() {
 
   //make dancer slide
   // this.$node.animate({left: '+= 250px'}).fadeOut().fadeIn();animate({right: '+=250px'});
-  this.$node.animate({left: '+=50px'}).animate({right: '-=50px'}).animate({top: '+=20px'});
+  // this.$node.animate({left: '+=50px'}).animate({right: '-=50px'}).animate({top: '+=20px'});
 
   // this.$node.stop(true,true).animate({left: 500}, 5000, function() {
   //   this.$node.stop(true,true).animate({left: 100}, 5000);

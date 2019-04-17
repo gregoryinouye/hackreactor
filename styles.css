@@ -30,11 +30,43 @@ body, a:link, a:visited, a:active{
   border:10px solid blue;
 }
 .slidydancer{
-  border:10px solid yellow;
+  border:0px;
+  animation-duration: 2s;
+  animation-name: slidy;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 .rollydancer{
-  border:10px solid green;
+  border: 0px;
+  animation-name: rolly;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;  
+  width: 100px;
+  height: auto;
+
 }
 .lineupdancer{
   float: left;
+}
+
+@keyframes rolly {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+@keyframes slidy {
+  from {
+    margin-left: 50px;
+    width: auto;
+  }
+
+  to {
+    margin-left: 100px;
+    width: auto;
+  }
 }
