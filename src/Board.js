@@ -81,7 +81,7 @@
     hasRowConflictAt: function(rowIndex) {
       let row = this.get(rowIndex);
       let counter = row.reduce((acc, x) => acc + x);
-      return counter > 1 ? true : false;
+      return counter > 1;
     },
 
     // test if any rows on this board contain conflicts
@@ -103,7 +103,7 @@
       for (let i = 0; i < this.get('n'); i++) {
         counter += this.get(i)[colIndex];     
       }
-      return counter > 1 ? true : false;
+      return counter > 1;
     },
 
     // test if any columns on this board contain conflicts
@@ -121,12 +121,21 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      // number of squares to check on major diagonal = n - Math.abs(numDiag)
+      var counter = 0;
+      for (let i = 0; i < this.get('n'); i++) {
+        var column = majorDiagonalColumnIndexAtFirstRow + i;
+        if (column > 0 && column < n) {
+          counter += this.get(i)[column];
+        }
+      }
+      return counter > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+
+
     },
 
 
