@@ -123,9 +123,10 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       // number of squares to check on major diagonal = n - Math.abs(numDiag)
       var counter = 0;
-      for (let i = 0; i < this.get('n'); i++) {
+      var n = this.get('n');
+      for (let i = 0; i < n; i++) {
         var column = majorDiagonalColumnIndexAtFirstRow + i;
-        if (column > 0 && column < n) {
+        if (column >= 0 && column < n) {
           counter += this.get(i)[column];
         }
       }
@@ -134,8 +135,12 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-
-
+      for (var i = 2 - this.get('n'); i <= this.get('n') - 2; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
