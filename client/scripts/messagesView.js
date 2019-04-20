@@ -7,16 +7,18 @@ var MessagesView = {
     setInterval(function() {
       Parse.readAll(result => Messages = result);
       MessagesView.render();
-    }, 1000);
+    }, 9000);
   },
 
   render: function() {
     $('#chats').empty();
-    Messages.results.forEach(msg => {
-      if (RoomsView.currentRoom.includes(msg.roomname)) {
-        MessagesView.renderMessage(msg);
-      }
-    });
+    if(Object.keys(Messages).length === 0) {setTimeout(MessagesView.render, 1000)} else {
+      Messages.results.forEach(msg => {
+        if (RoomsView.currentRoom.includes(msg.roomname)) {
+          MessagesView.renderMessage(msg);
+        }
+      });
+    }
   },
 
   renderMessage: function(message) {

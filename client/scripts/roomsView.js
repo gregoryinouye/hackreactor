@@ -13,7 +13,8 @@ var RoomsView = {
         }
       });
       RoomsView.render(); 
-      //RoomsView.roomChange(); 
+      RoomsView.roomChange(); 
+      RoomsView.roomAdd();
     }, 1000);
     setInterval(function() {
       Messages.results.forEach(function(msg) {
@@ -46,6 +47,14 @@ var RoomsView = {
         RoomsView.currentRoom.push(this.text);
       });
       MessagesView.render();
+    });
+  },
+
+  roomAdd: function() {
+    RoomsView.$button.on('click', function() {
+      var newRoom = prompt('What do you want to name your name');
+      Rooms[newRoom] = newRoom;
+      RoomsView.render();
     });
   }
 };
