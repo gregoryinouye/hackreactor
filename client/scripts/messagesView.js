@@ -12,7 +12,11 @@ var MessagesView = {
 
   render: function() {
     $('#chats').empty();
-    Messages.results.forEach(msg => MessagesView.renderMessage(msg));
+    Messages.results.forEach(msg => {
+      if (RoomsView.currentRoom.includes(msg.roomname)) {
+        MessagesView.renderMessage(msg);
+      }
+    });
   },
 
   renderMessage: function(message) {

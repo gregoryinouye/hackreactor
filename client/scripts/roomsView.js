@@ -2,15 +2,18 @@ var RoomsView = {
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
+  currentRoom: [],
 
   initialize: function() {
+    
     setTimeout(function() {
       Messages.results.forEach(function(msg) {
         if (msg.roomname) {
           Rooms[msg.roomname] = msg.roomname;
         }
       });
-      RoomsView.render();  
+      RoomsView.render(); 
+      //RoomsView.roomChange(); 
     }, 1000);
     setInterval(function() {
       Messages.results.forEach(function(msg) {
@@ -33,6 +36,16 @@ var RoomsView = {
   },
 
   roomHtml: _.template(
-    "<option value=<%- roomname %>><%- roomname %></option>"
-    )
+    "<option value=<%- roomname %> class='roomname'><%- roomname %></option>"
+  ),
+
+  roomChange: function() {
+    RoomsView.$select.change(function() {
+      RoomsView.currentRoom = [];
+      $("select option:selected").each(function() {
+        RoomsView.currentRoom.push(this.text);
+      });
+      MessagesView.render();
+    });
+  }
 };
