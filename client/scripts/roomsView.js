@@ -5,29 +5,21 @@ var RoomsView = {
   currentRoom: [],
 
   initialize: function() {
+  
+    RoomsView.roomChange(); 
+    RoomsView.roomAdd();
     
-    setTimeout(function() {
-      Messages.results.forEach(function(msg) {
-        if (msg.roomname) {
-          Rooms[msg.roomname] = msg.roomname;
-        }
-      });
-      RoomsView.render(); 
-      RoomsView.roomChange(); 
-      RoomsView.roomAdd();
-    }, 1000);
-    setInterval(function() {
-      Messages.results.forEach(function(msg) {
-        if (msg.roomname) {
-          Rooms[msg.roomname] = msg.roomname;
-        }
-      });
-      RoomsView.render();
-    }, 50000);
   },
 
   render: function() {
     $('select').empty();
+
+    Messages.results.forEach(function(msg) {
+      if (msg.roomname) {
+        Rooms[msg.roomname] = msg.roomname;
+      }
+    });
+    
     Object.keys(Rooms).forEach(keyNames => RoomsView.renderRoom(keyNames));
   },
 

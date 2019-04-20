@@ -21,7 +21,12 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       // console.log(data);
+      Messages = data; //add roomview render and messagesview render
 
+      RoomsView.render();
+      MessagesView.render();
+      setTimeout(App.fetch, 2000);
+      
       callback();
     });
   },

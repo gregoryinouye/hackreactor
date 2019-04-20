@@ -3,11 +3,7 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    Parse.readAll(result => Messages = result);
-    setInterval(function() {
-      Parse.readAll(result => Messages = result);
-      MessagesView.render();
-    }, 9000);
+    
   },
 
   render: function() {
