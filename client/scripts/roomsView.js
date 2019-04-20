@@ -7,7 +7,7 @@ var RoomsView = {
     setTimeout(function() {
       Messages.results.forEach(function(msg) {
         if (msg.roomname) {
-          Rooms[msg.roomname] = {'roomname': msg.roomname};
+          Rooms[msg.roomname] = msg.roomname;
         }
       });
       RoomsView.render();  
@@ -15,7 +15,7 @@ var RoomsView = {
     setInterval(function() {
       Messages.results.forEach(function(msg) {
         if (msg.roomname) {
-          Rooms[msg.roomname] = {'roomname': msg.roomname};
+          Rooms[msg.roomname] = msg.roomname;
         }
       });
       RoomsView.render();
@@ -24,11 +24,12 @@ var RoomsView = {
 
   render: function() {
     $('select').empty();
-    Object.keys(Rooms).forEach(keyNames => RoomsView.renderRoom(RoomsView.roomHtml(Rooms[keyNames])));
+    Object.keys(Rooms).forEach(keyNames => RoomsView.renderRoom(keyNames));
   },
 
   renderRoom: function(roomName) {
-    $('select').append(roomName);
+    var rn = {roomname: roomName};
+    $('select').append(RoomsView.roomHtml(rn));
   },
 
   roomHtml: _.template(
