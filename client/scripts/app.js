@@ -19,14 +19,12 @@ var App = {
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
-      // examine the response from the server request:
-      // console.log(data);
-      Messages = data; //add roomview render and messagesview render
+      Messages = data;
 
       RoomsView.render();
       MessagesView.render();
       setTimeout(App.fetch, 2000);
-      
+
       callback();
     });
   },

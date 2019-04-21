@@ -9,11 +9,26 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-
-    console.log($('#message').value);
-
     
-    console.log('click!');
+    var msg = $('#message').val();
+    if (msg) {
+      var msgForServ = FormView.createMessage(msg);
+      Parse.create(msgForServ);
+      $('#message').val('');
+    } else {
+      console.log('please enter a message!');
+    }
+  },
+
+  createMessage: function(msg) {
+    var outputMsg = {
+      username: App.username,
+      text: msg,
+      roomname: RoomsView.currentRoom[0] ? RoomsView.currentRoom[0] : 'default',
+      createdAt: new Date(),
+    };
+
+    return outputMsg;
   },
 
   setStatus: function(active) {

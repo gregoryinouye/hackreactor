@@ -19,7 +19,7 @@ var RoomsView = {
         Rooms[msg.roomname] = msg.roomname;
       }
     });
-    
+
     Object.keys(Rooms).forEach(keyNames => RoomsView.renderRoom(keyNames));
   },
 
@@ -44,7 +44,7 @@ var RoomsView = {
 
   roomAdd: function() {
     RoomsView.$button.on('click', function() {
-      var newRoom = prompt('What do you want to name your name');
+      var newRoom = prompt('What do you want to name your room?');
       Rooms[newRoom] = newRoom;
       RoomsView.render();
     });
