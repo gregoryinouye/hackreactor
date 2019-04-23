@@ -10,10 +10,15 @@ class App extends React.Component {
     this.state = {
       focusedVideo: exampleVideoData[0]
     };
-    // handleClick()
-    // pass to VideoListEntry as a function
-    // event handler in videoListEntry so when it's clicked, it jumps back to App.js
-    // pass focusedVideo to videoPlayer
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+  // handleClick()
+  // pass to VideoListEntry as a function
+  // event handler in videoListEntry so when it's clicked, it jumps back to App.js
+  // pass focusedVideo to videoPlayer
+  handleClick(props) {
+    this.setState({focusedVideo: props.video});
   }
 
   render() {
@@ -26,10 +31,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={exampleVideoData[0]} state={this.state}/></div>
+            <div><VideoPlayer video={this.state.focusedVideo}/></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={exampleVideoData} state={this.state}/></div>
+            <div><VideoList videos={exampleVideoData} onClick={this.handleClick}/></div>
           </div>
         </div>
       </div>

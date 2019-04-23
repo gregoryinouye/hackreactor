@@ -1,6 +1,6 @@
 var VideoListEntry = (props) => (
-  <div className="video-list-entry media">
-    <div className="media-left media-middle">
+  <div className="video-list-entry media" onClick={() => props.onClick(props)}>
+    <div className="media-left media-middle" onClick={() => props.onClick(props)}>
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt={props.video.snippet.title}/>
     </div>
     <div className="media-body">
