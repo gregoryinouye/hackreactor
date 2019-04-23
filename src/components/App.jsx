@@ -13,12 +13,9 @@ class App extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
-  // handleClick()
-  // pass to VideoListEntry as a function
-  // event handler in videoListEntry so when it's clicked, it jumps back to App.js
-  // pass focusedVideo to videoPlayer
-  handleClick(props) {
-    this.setState({focusedVideo: props.video});
+
+  handleClick(video) {
+    this.setState({focusedVideo: video});
   }
 
   render() {
