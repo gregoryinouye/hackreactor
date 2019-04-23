@@ -1,6 +1,7 @@
-import VideoList from './VideoList.js'
-import Search from './Search.js'
-import VideoPlayer from './VideoPlayer.js'
+import Search from './Search.js';
+import VideoList from './VideoList.js';
+import VideoPlayer from './VideoPlayer.js';
+import exampleVideoData from '../data/exampleVideoData.js';
 
 var App = () => (
   <div>
@@ -14,7 +15,7 @@ var App = () => (
         <div><VideoPlayer/></div>
       </div>
       <div className="col-md-5">
-        <div><VideoList/></div>
+        <div><VideoList videos={exampleVideoData}/></div>
       </div>
     </div>
   </div>
