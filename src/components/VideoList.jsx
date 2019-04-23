@@ -1,5 +1,11 @@
-var VideoList = () => (
+// import exampleVideoData from './src/data/exampleVideoData.js';
+
+
+var VideoList = (props) => (
   <div className="video-list">
+
+    {/* <div><h5><em>{exampleVideoData[0].snippet.title}</em> {exampleVideoData[0].snippet.thumbnails}</h5></div> */}
+
     <div><h5><em>videoListEntry</em> view goes here</h5></div>
     <div><h5><em>videoListEntry</em> view goes here</h5></div>
     <div><h5><em>videoListEntry</em> view goes here</h5></div>
