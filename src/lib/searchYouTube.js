@@ -1,7 +1,3 @@
-import YOUTUBE_API_KEY from '../config/youtube.js';
-
-// options must include part = snippet, key = youtube_api_key
-
 var searchYouTube = (options, successCB = null, errorCB = null) => {
   let searchTerms = {};
   searchTerms.key = options.key;
