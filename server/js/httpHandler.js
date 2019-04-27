@@ -17,12 +17,17 @@ module.exports.router = (req, res, next = ()=>{}) => {
     res.writeHead(200, headers);
     let direction = messages.dequeue() || 'no moves stored';
     res.end(direction);
-  } else if (req.method === 'GET' && req.url === './background.jpg') {
-
-    //check if there is a background file - if not, then return 404
-    res.writeHead(200, headers);
-    let msg = fs.ReadStream('./background.jpg') || null;
-    res.end(msg);
+  } else if (req.method === 'GET' && /[A-Za-z]*.jpg/.test(req.url)) {
+    if (fs.existsSync(req.url)) {
+      res.writeHead(200, headers);
+      const bgImageFile = fs.createReadStream(req.url);
+      bgImageFile.pipe(res);
+      res.end();
+    } else {
+      res.writeHead(404, headers);
+      res.end('Not found');
+      next();
+    }
   }
 };
 

@@ -15,9 +15,12 @@
   const ajaxGetBackground = () => {
     $.ajax({
       type: 'GET',
-      url: './background.jpg',
+      url: serverUrl + '/background.jpg',
       success: (data) => {
         return data;
+      },
+      error: (data, errorType, errorThrown) => {
+        console.error('1:', data, '2:', errorType, '3:', errorThrown);
       }
     });
   };
