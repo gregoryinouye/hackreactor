@@ -13,11 +13,16 @@ module.exports.router = (req, res, next = ()=>{}) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
-  }
-  if (req.method === 'GET') {
+  } else if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, headers);
     let direction = messages.dequeue() || 'no moves stored';
     res.end(direction);
+  } else if (req.method === 'GET' && req.url === './background.jpg') {
+
+    //check if there is a background file - if not, then return 404
+    res.writeHead(200, headers);
+    let msg = fs.ReadStream('./background.jpg') || null;
+    res.end(msg);
   }
 };
 
