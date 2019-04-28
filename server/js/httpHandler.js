@@ -17,25 +17,18 @@ module.exports.router = (req, res, next = ()=>{}) => {
     res.writeHead(200, headers);
     let direction = messages.dequeue() || 'no moves stored';
     res.end(direction);
-  } else if (req.method === 'GET' && /[A-Za-z]*.jpg/.test(req.url)) {
-    if (fs.existsSync(req.url)) {
-      res.writeHead(200, headers);
-      const bgImageFile = fs.createReadStream(req.url);
-      bgImageFile.pipe(res);
-      res.end();
-    } else {
-      res.writeHead(404, headers);
-      res.end('Not found');
-      next();
-    }
+  } else if (req.method === 'GET' && req.url === '/background.jpg') {
+    fs.readFile(module.exports.backgroundImageFile, (err, fileData) => {
+      if (err) {
+        res.writeHead(404, headers);
+        res.end('Not found');
+        next();
+      } else {
+        res.writeHead(201, headers);
+        res.write(fileData, 'binary');
+        res.end();
+        next();
+      }
+    });
   }
 };
-
-
-// if (req.method === 'GET') {
-//   let directionArr = ['up', 'down', 'left', 'right'];
-//   let randomDirection = directionArr[Math.floor(Math.random()*directionArr.length)];
-//   res.writeHead(200, headers);
-//   res.end(randomDirection);
-// }
-// };
