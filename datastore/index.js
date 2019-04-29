@@ -9,8 +9,10 @@ var items = {};
 
 exports.create = (text, callback) => {
   counter.getNextUniqueId((err, result) => {
-    items[result] = text;
-    callback(null, { result, text });
+    var newTodoFile = path.join(exports.dataDir, `${result}.txt`);
+    fs.writeFile(newTodoFile, text, (err, data) => {
+      callback(err, {id: result, text: text});
+    });
   });
 };
 

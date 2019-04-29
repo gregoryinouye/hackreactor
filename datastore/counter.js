@@ -42,7 +42,7 @@ exports.getNextUniqueId = (callback) => {
   readCounter((err, num) => {
     var count = num + 1;
     writeCounter(count, (err, data) => {
-      callback(null, zeroPaddedNumber(data));
+      callback(err, zeroPaddedNumber(data));
     });
   });
   // counter = counter + 1;
