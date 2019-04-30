@@ -39,14 +39,30 @@ exports.readOne = (id, callback) => {
 };
 
 exports.update = (id, text, callback) => {
-  var item = items[id];
-  if (!item) {
-    callback(new Error(`No item with id: ${id}`));
-  } else {
-    items[id] = text;
-    callback(null, { id, text });
-  }
+  var filePath = path.join(exports.dataDir, `${id}.txt`);
+  fs.readFile(filePath, 'utf8', (err, oldText) => {
+    if (err) {
+      callback(new Error(`No item with id: ${id}`));  
+    } else {
+      fs.writeFile(filePath, text, (err, data) => {
+        callback(null, { id, text });
+      });
+    }
+  });
 };
+
+//TRY TO REFACTOR
+// exports.readOne(id, (err, oldText) => {
+//   if (err) {
+//     return err;
+//   } else {
+//     var filePath = path.join(exports.dataDir, `${id}.txt`);
+//   fs.writeFile(filePath, text, (err, { id, text }) => {
+//     callback(null, { id, text });
+//   });
+//   }   
+// });
+
 
 exports.delete = (id, callback) => {
   var item = items[id];
