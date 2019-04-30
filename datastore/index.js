@@ -8,22 +8,30 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  counter.getNextUniqueId((err, result) => {
-    var newTodoFile = path.join(exports.dataDir, `${result}.txt`);
+  counter.getNextUniqueId((err, id) => {
+    var newTodoFile = path.join(exports.dataDir, `${id}.txt`);
     fs.writeFile(newTodoFile, text, (err, data) => {
-      callback(err, {id: result, text: text});
+      callback(err, {id: id, text: text});
     });
   });
 };
 
 exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
+  fs.readdir(exports.dataDir, (err, data) => {
+    var readAllArray = [];
+    _.each(data, (fileName) => {
+      var id = fileName.split('.')[0];
+      readAllArray.push({id: id, text: id});
+    });
+    callback(err, readAllArray);
   });
-  callback(null, data);
 };
 
 exports.readOne = (id, callback) => {
+  /*
+
+  */
+
   var text = items[id];
   if (!text) {
     callback(new Error(`No item with id: ${id}`));
