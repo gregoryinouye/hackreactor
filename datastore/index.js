@@ -16,14 +16,26 @@ exports.create = (text, callback) => {
   });
 };
 
+
+
 exports.readAll = (callback) => {
   fs.readdir(exports.dataDir, (err, data) => {
-    var readAllArray = [];
+    var promiseArray = [];
     _.each(data, (fileName) => {
       var id = fileName.split('.')[0];
-      readAllArray.push({id: id, text: id});
+      promiseArray.push(new Promise((resolve, reject) => {
+        fs.readFile(path.join(exports.dataDir, fileName), 'utf8', (err, text) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({id: id, text: text});
+          }
+        });
+      }));
     });
-    callback(err, readAllArray);
+    Promise.all(promiseArray).then((value) => {
+      callback(err, value);
+    });
   });
 };
 
