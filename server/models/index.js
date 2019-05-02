@@ -11,15 +11,35 @@ module.exports = {
         }
       });
     },
-    post: function (text, callback) {
-      // async to get user id from username?
-      // if username does not exist
-      // // post into username table using users.post
-      // get username id to post
-      // save message to to db using user id?
-      console.log(text);
-      callback(null, 'db: message posted');
-    } // a function which can be used to insert a message into the database
+    post: function (reqBody, callback) {
+      db.dbConnection.query(`SELECT id from users where username = '${reqBody.username}'`, (err, results) => {
+        if (err) {
+          console.log(err);
+        } else if (results.length === 0) {
+          db.dbConnection.query(`INSERT into users (username) VALUES('${reqBody.username}')`, (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              db.dbConnection.query(`INSERT INTO messages (text, user_id, roomname) VALUES('${reqBody.message}', (SELECT id from users WHERE username = '${reqBody.username}'), '${reqBody.roomname}')`, (err) => {
+                if (err) {
+                  console.log('username not found');
+                } else {
+                  callback(null, 'db: message posted');
+                }
+              });
+            }
+          });
+        } else {
+          db.dbConnection.query(`INSERT INTO messages (text, user_id, roomname) VALUES('${reqBody.message}', (SELECT id from users WHERE username = '${reqBody.username}'), '${reqBody.roomname}')`, (err) => {
+            if (err) {
+              console.log('username not found');
+            } else {
+              callback(null, 'db: message posted');
+            }
+          });
+        }
+      });
+    }
   },
 
   users: {
