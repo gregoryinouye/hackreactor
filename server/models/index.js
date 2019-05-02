@@ -3,7 +3,6 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (callback) {
-      console.log('get reached db');
       db.dbConnection.query('SELECT * FROM messages', (err, results) => {
         if (err) {
           console.log(err);
@@ -11,14 +10,28 @@ module.exports = {
           callback(null, results);
         }
       });
-      // select * from messages
-    }, // a function which produces all the messages
-    post: function () {} // a function which can be used to insert a message into the database
+    },
+    post: function (text, callback) {
+      // async to get user id from username?
+      // if username does not exist
+      // // post into username table using users.post
+      // get username id to post
+      // save message to to db using user id?
+      console.log(text);
+      callback(null, 'db: message posted');
+    } // a function which can be used to insert a message into the database
   },
 
   users: {
-    // Ditto as above.
-    get: function () {},
+    get: function (callback) {
+      db.dbConnection.query('SELECT * FROM users', (err, results) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(null, results);
+        }
+      });
+    },
     post: function () {}
   }
 };

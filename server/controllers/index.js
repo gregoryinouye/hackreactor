@@ -13,13 +13,26 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      console.log(req);
-    } // a function which handles posting a message to the database
+      models.messages.post(req.body, (err, data) => {
+        if (err) {
+          res.send('not able to post message');
+        } else {
+          res.send('message posted');
+        }
+      });
+    }
   },
 
   users: {
-    // Ditto as above
-    get: function (req, res) {},
+    get: function (req, res) {
+      models.users.get((err, data) => {
+        if (err) {
+          res.send('not able to retrieve users');
+        } else {
+          res.send(data);
+        }
+      });
+    },
     post: function (req, res) {}
   }
 };
