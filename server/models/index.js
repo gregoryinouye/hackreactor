@@ -32,7 +32,15 @@ module.exports = {
         }
       });
     },
-    post: function () {}
+    post: function (username, callback) {
+      db.dbConnection.query(`INSERT into users (username) VALUES('${username}')`, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(null, 'db: user posted');
+        }
+      });
+    }
   }
 };
 

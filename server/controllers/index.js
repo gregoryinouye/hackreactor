@@ -33,7 +33,16 @@ module.exports = {
         }
       });
     },
-    post: function (req, res) {}
+    post: function (req, res) {
+      var username = req.body[0].username;
+      models.users.post(username, (err) => {
+        if (err) {
+          res.send('not able to post user');
+        } else {
+          res.send('user posted');
+        }
+      });
+    }
   }
 };
 
