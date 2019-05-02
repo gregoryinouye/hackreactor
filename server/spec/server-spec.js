@@ -40,7 +40,7 @@ describe('Persistent Node Chat Server', function() {
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
           username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
+          message: 'In mercy name, three days is all I need.',
           roomname: 'Hello'
         }
       }, function () {
@@ -57,7 +57,7 @@ describe('Persistent Node Chat Server', function() {
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
+          expect(results[0].text).to.equal('In mercy name, three days is all I need.');
 
           done();
         });
