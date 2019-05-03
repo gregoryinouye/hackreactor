@@ -19,7 +19,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', 
 (req, res) => {
-  res.render('index');
+  // check if logged in
+  //   if yes, then send to link page
+  //   if no, then send to login page
+  res.render('login');
 });
 
 app.get('/create', 
@@ -78,7 +81,29 @@ app.post('/links',
 // Write your authentication routes here
 /************************************************************/
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
+app.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+app.post('/login', (req, res) => {
+  console.log('login attempted');
+  // attempt login
+  // if unsuccessful, return to login page
+  // if successful, then load links page
+  res.render('index');
+});
+
+app.post('/signup', (req, res) => {
+  console.log('signup attempted');
+  // attempt user creation
+  // if successful, then pass cookie and load links page
+  // if unsuccessful, then return to signup page
+  res.render('index');
+});
 
 /************************************************************/
 // Handle the code parameter route last - if all other routes fail

@@ -23,6 +23,7 @@
     "lodash": "^4.17.4",
     "mysql": "^2.12.0",
     "node-mocks-http": "^1.6.1",
+    "nodemon": "^1.19.0",
     "request": "^2.34.0"
   },
   "devDependencies": {
