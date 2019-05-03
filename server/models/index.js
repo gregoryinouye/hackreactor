@@ -3,7 +3,7 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (callback) {
-      db.dbConnection.query('SELECT * FROM messages', (err, results) => {
+      db.dbConnection.query('SELECT messages.text, messages.roomname, users.username FROM messages LEFT OUTER JOIN users ON users.id WHERE users.id = messages.user_id', (err, results) => {
         if (err) {
           console.log(err);
         } else {

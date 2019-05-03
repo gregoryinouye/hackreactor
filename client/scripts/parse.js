@@ -1,12 +1,12 @@
 var Parse = {
 
-  server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
-  // server: 'http://127.0.0.1:3000/', // fix this route
+  // server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
+  server: 'http://127.0.0.1:3000',
 
   create: function(message, successCB, errorCB = null) {
 
     $.ajax({
-      url: Parse.server,
+      url: Parse.server + '/classes/messages',
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
@@ -19,9 +19,9 @@ var Parse = {
 
   readAll: function(successCB, errorCB = null) {
     $.ajax({
-      url: Parse.server,
+      url: Parse.server + '/classes/messages',
       type: 'GET',
-      data: { order: '-createdAt' },
+      // data: { order: '-createdAt' },
       contentType: 'application/json',
       success: successCB,
       error: errorCB || function(error) {
@@ -29,5 +29,4 @@ var Parse = {
       }
     });
   }
-
 };
