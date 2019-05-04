@@ -88,10 +88,10 @@ app.post('/login', (req, res) => {
   Auth.createSession(req, res, (err, data) => {
     if (err) {
       console.log(err);
-      res.end();
+      res.redirect('/login');
     } else {
       console.log(data);
-      res.end();
+      res.redirect('/');
     }
   });
 });
@@ -100,10 +100,10 @@ app.post('/signup', (req, res) => {
   Auth.createUser(req, res, (err, data) => {
     if (err) {
       console.log(err);
-      res.end();
+      res.redirect('/signup');
     } else {
       console.log(data);
-      res.end();
+      res.redirect('/');
     }
   });
 });
