@@ -82,7 +82,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  Auth.createSession(req, res, (err, data) => {
+  Auth.login(req, res, (err, data) => {
     if (err) {
       console.log(err);
       res.redirect('/login');

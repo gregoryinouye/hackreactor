@@ -3,17 +3,26 @@ const Promise = require('bluebird');
 const parseCookies = require('../middleware/cookieParser.js');
 
 module.exports.createSession = (req, res, next) => {
-  models.Users.get({username: req.body.username})
-    .then(userObj => {
-      if (!userObj) {
-        next('user does not exist');
-      } else if (models.Users.compare(req.body.password, userObj.password, userObj.salt)) {
-      // send cookie with response
-        next(null, 'authenticated');
+  parseCookies(req, res, (hasCookies, data) => {
+    // no cookies
+    if (!hasCookies) {
+      // create cookie
+      models.Sessions.create()
+        .then((sessionData) => {
+          console.log(typeof sessionData);
+          console.log(sessionData);
+        }).catch();
+    } else {
+      //check if valid cookie
+      if (models.Sessions.isLoggedIn(req.cookie.shortlyid)) {
+        //   yes: set up session with existing cookie
+        models.Sessions.get({});
       } else {
-        next('authentication error');
+        console.log('need to create new cookie');
+        // no: create new cookie
       }
-    });
+    }
+  });
 };
 
 /************************************************************/
@@ -38,26 +47,16 @@ module.exports.createUser = (req, res, next) => {
     });
 };
 
-// module.exports.createSession = (req, res, next) => {
-//   parseCookies(req, res, (hasCookies, data) => {
-//     // no cookies
-//     if (!hasCookies) {
-//       // create cookie
-//       models.Sessions.create()
-//         .then((sessionData) => {
-//           console.log(typeof sessionData)
-//           console.log(sessionData)
-
-//         }).catch();
-//     // } else {
-//     //   //check if valid cookie
-//     //   if (models.Sessions.isLoggedIn(req.cookie.shortlyid)) {
-//     //     //   yes: set up session with existing cookie
-//     //     models.Sessions.get({})
-//     //   } else {
-//     //     console.log('need to create new cookie');
-//     //     // no: create new cookie
-//     //   }
-//     }
-//   });
-// };
+module.exports.login = (req, res, next) => {
+  models.Users.get({username: req.body.username})
+    .then(userObj => {
+      if (!userObj) {
+        next('user does not exist');
+      } else if (models.Users.compare(req.body.password, userObj.password, userObj.salt)) {
+      // send cookie with response
+        next(null, 'authenticated');
+      } else {
+        next('authentication error');
+      }
+    });
+};
