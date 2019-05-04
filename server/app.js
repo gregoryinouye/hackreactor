@@ -17,9 +17,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/', (req, res) => {
-  // check if logged in
-  //   if yes, then send to link page
-  //   if no, then send to login page
   res.render('login');
 });
 
