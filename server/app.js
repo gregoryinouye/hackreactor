@@ -88,19 +88,24 @@ app.post('/login', (req, res) => {
   Auth.createSession(req, res, (err, data) => {
     if (err) {
       console.log(err);
+      res.end();
     } else {
       console.log(data);
+      res.end();
     }
   });
 });
 
 app.post('/signup', (req, res) => {
-  console.log('signup attempted');
-  console.log();
-  // attempt user creation
-  // if successful, then pass cookie and load links page
-  // if unsuccessful, then return to signup page
-  res.render('index');
+  Auth.createUser(req, res, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      console.log(data);
+      res.end();
+    }
+  });
 });
 
 /************************************************************/
