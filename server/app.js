@@ -16,22 +16,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 
-
-app.get('/', 
-(req, res) => {
+app.get('/', (req, res) => {
   // check if logged in
   //   if yes, then send to link page
   //   if no, then send to login page
   res.render('login');
 });
 
-app.get('/create', 
-(req, res) => {
+app.get('/create', (req, res) => {
   res.render('index');
 });
 
-app.get('/links', 
-(req, res, next) => {
+app.get('/links', (req, res, next) => {
   models.Links.getAll()
     .then(links => {
       res.status(200).send(links);
@@ -41,8 +37,7 @@ app.get('/links',
     });
 });
 
-app.post('/links', 
-(req, res, next) => {
+app.post('/links', (req, res, next) => {
   var url = req.body.url;
   if (!models.Links.isValidUrl(url)) {
     // send back a 404 if link is not valid
@@ -90,15 +85,18 @@ app.get('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  console.log('login attempted');
-  // attempt login
-  // if unsuccessful, return to login page
-  // if successful, then load links page
-  res.render('index');
+  Auth.createSession(req, res, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+    }
+  });
 });
 
 app.post('/signup', (req, res) => {
   console.log('signup attempted');
+  console.log();
   // attempt user creation
   // if successful, then pass cookie and load links page
   // if unsuccessful, then return to signup page
