@@ -5,13 +5,17 @@ const parseCookies = require('../middleware/cookieParser.js');
 module.exports.createSession = (req, res, next) => {
   parseCookies(req, res, (hasCookies, data) => {
     // no cookies
-    if (!hasCookies) {
+    if (!hasCookies || !req.cookie || !req.cookie.shortlyid) {
       // create cookie
       models.Sessions.create()
-        .then((sessionData) => {
-          console.log(typeof sessionData);
-          console.log(sessionData);
-        }).catch();
+        .then(({insertId}) => {
+          models.Sessions.get({id: insertId})
+            .then((sessionObj) => {
+              res.cookies.shortlyid = {value: sessionObj.hash};
+              req.session = {hash: sessionObj.hash};
+              next(null, 'session created');
+            }).catch();
+        });
     } else {
       //check if valid cookie
       if (models.Sessions.isLoggedIn(req.cookie.shortlyid)) {
