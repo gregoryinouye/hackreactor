@@ -2,11 +2,64 @@
 <html>
   <head>
     <title>Tic Tac Toe</title>
-    <h1>Tic Tac Toe</h1>
+    <h1 class="center">Tic Tac Toe</h1>
   <script src='app.js'></script>
   </head>
+  <style>
+    .center {
+      margin: auto;
+    }
+
+    table {
+      width: 200px;
+      height: 200px;
+    }
+
+    .reset {
+      margin: auto;
+      padding: 4px;
+    }
+  </style>
   <body>
-    <div id="tictactoe"></div>
+    <div>
+      <table border="10">
+        <tr>
+          <td class="tictactoe" id="0,0" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="0,1" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="0,2" onclick="addMove(id)"></td>
+        </tr>
+        <tr>
+          <td class="tictactoe" id="1,0" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="1,1" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="1,2" onclick="addMove(id)"></td>
+        </tr>
+        <tr>
+          <td class="tictactoe" id="2,0" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="2,1" onclick="addMove(id)"></td>
+          <td class="tictactoe" id="2,2" onclick="addMove(id)"></td>
+        </tr>
+      </table>
+    </div>
+    <div></div>
+    <div></div>
     <button class="reset" type="button">Reset</button>
   </body>
 </html>
+
+<!-- <table>
+    <tr>
+      <td>Box 0,0</td>
+      <td>Box 0,1</td>
+      <td>Box 0,2</td>
+    </tr>
+    <tr>
+      <td>Box 1,0</td>
+      <td>Box 1,1</td>
+      <td>Box 1,2</td>
+    </tr>
+    <tr>
+      <td>Box 2,0</td>
+      <td>Box 2,1</td>
+      <td>Box 2,2</td>
+    </tr>
+  </table> -->
