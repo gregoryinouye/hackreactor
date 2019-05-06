@@ -11,13 +11,23 @@
     }
 
     table {
+      table-layout: fixed;
       width: 200px;
       height: 200px;
       margin: 0;
+      padding: 0;
+      font-size: 7;
+    }
+
+    table td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 30pt;
     }
 
     .reset {
-      margin: auto;
+      margin: 10px;
       padding: 4px;
     }
   </style>
@@ -46,21 +56,3 @@
     <button class="reset" type="button" onclick="resetBoard()">Reset</button>
   </body>
 </html>
-
-<!-- <table>
-    <tr>
-      <td>Box 0,0</td>
-      <td>Box 0,1</td>
-      <td>Box 0,2</td>
-    </tr>
-    <tr>
-      <td>Box 1,0</td>
-      <td>Box 1,1</td>
-      <td>Box 1,2</td>
-    </tr>
-    <tr>
-      <td>Box 2,0</td>
-      <td>Box 2,1</td>
-      <td>Box 2,2</td>
-    </tr>
-  </table> -->
