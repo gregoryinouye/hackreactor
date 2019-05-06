@@ -6,10 +6,10 @@ let boardValues = new Array(9).fill('');
 let isGameFinished = false;
 let gameWinner = null;
 
-let checkGameStatus = () => {
-  // if (!isGameFinished) {
-    
-  // }
+let checkGameStatus = (boxId, lastMove) => {
+  if (!isGameFinished) {
+    checkAllWins(boxId, lastMove);
+  }
 };
 
 let getBoardValues = () => {
@@ -24,7 +24,7 @@ let updateBoardValue = (boxId, value) => {
 };
 
 let checkRowWin = ([row, column], lastMove) => {
-  let currRow = [0, 1, 2].map(element => boardValues[row * 3 + element]);
+  let currRow = [0, 1, 2].map(element => boardValues[Number(row) * 3 + Number(element)]);
   if (currRow.every(item => item === lastMove)) {
     gameWinner = lastMove;
     return isGameFinished = true;
@@ -34,7 +34,7 @@ let checkRowWin = ([row, column], lastMove) => {
 }
 
 let checkColumnWin = ([row, column], lastMove) => {
-  let currCol = [0, 1, 2].map(element => boardValues[element * 3 + column]);
+  let currCol = [0, 1, 2].map(element => boardValues[Number(element) * 3 + Number(column)]);
   if (currCol.every(item => item === lastMove)) {
     gameWinner = lastMove;
     return isGameFinished = true;
@@ -43,20 +43,21 @@ let checkColumnWin = ([row, column], lastMove) => {
   }
 }
 
-let checkDiagWin = (parsedId) => {
+let checkDiagWin = ([row, column]) => {
 
   //check if row, column is on a diag
   // if yes, then check for winner
   // else return false
 }
 
-let checkAllWins = boxId => {
-  locArr = parseBoxId(boxId);
-  if (checkRowWin(locArr) || checkColumnWin(locArr) || checkDiagWin(locArr)) {
+let checkAllWins = (boxId, lastMove) => {
+  let locArr = parseBoxId(boxId);
+  if (checkRowWin(locArr, lastMove) || checkColumnWin(locArr, lastMove) || checkDiagWin(locArr, lastMove)) {
     return gameWinner;
-  } else if (board) // board is full, return TIE
+  } else if (boardValues.every(element => element !== ''))
     {
-      //do stuff
+      // isGameFinished = true;
+      alert('tie game');
   }
 }
 
@@ -79,7 +80,7 @@ let addMove = function(boxId) {
     let value = getNextMove();
     updateBox(boxId, value);
     updateBoardValue(boxId, value)
-    checkGameStatus();
+    checkGameStatus(boxId, value);
   }
 };
 
@@ -87,6 +88,7 @@ let addMove = function(boxId) {
 
 let resetBoard = function() {
   board.forEach(id => updateBox(id, ''))
+  nextMove = 'X';
   isGameFinished = false;
   boardValues = new Array(9).fill('');
   gameWinner = null;
