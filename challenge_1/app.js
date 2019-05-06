@@ -31,7 +31,7 @@ let checkRowWin = ([row, column], lastMove) => {
   } else {
     return isGameFinished;
   }
-}
+};
 
 let checkColumnWin = ([row, column], lastMove) => {
   let currCol = [0, 1, 2].map(element => boardValues[Number(element) * 3 + Number(column)]);
@@ -41,25 +41,30 @@ let checkColumnWin = ([row, column], lastMove) => {
   } else {
     return isGameFinished;
   }
-}
+};
 
-let checkDiagWin = ([row, column]) => {
-
-  //check if row, column is on a diag
-  // if yes, then check for winner
-  // else return false
-}
+let checkDiagWin = (boxId, lastMove) => {
+  if (['0,0', '1,1', '2,2'].includes(boxId) && [0, 4, 8].every(item => boardValues[item] === lastMove)) {
+    gameWinner = lastMove;
+    return isGameFinished = true;
+  } else if (['0,2', '1,1', '2,0'].includes(boxId) && [2, 4, 6].every(item => boardValues[item] === lastMove)) {
+    gameWinner = lastMove;
+    return isGameFinished = true;
+  } else {
+    return isGameFinished;
+  }
+};
 
 let checkAllWins = (boxId, lastMove) => {
   let locArr = parseBoxId(boxId);
-  if (checkRowWin(locArr, lastMove) || checkColumnWin(locArr, lastMove) || checkDiagWin(locArr, lastMove)) {
+  if (checkRowWin(locArr, lastMove) || checkColumnWin(locArr, lastMove) || checkDiagWin(boxId, lastMove)) {
+    console.log(gameWinner);
     return gameWinner;
-  } else if (boardValues.every(element => element !== ''))
-    {
-      // isGameFinished = true;
-      alert('tie game');
+  } else if (boardValues.every(element => element !== '')) {
+    isGameFinished = true;
+    alert('tie game');
   }
-}
+};
 
 // *** CONTROLLER *** //
 
