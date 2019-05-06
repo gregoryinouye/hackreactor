@@ -5,6 +5,7 @@ let board = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 let boardValues = new Array(9).fill('');
 let isGameFinished = false;
 let gameWinner = null;
+let gameHistory = {X: 0, O: 0, tie: 0};
 
 let checkGameStatus = (boxId, lastMove) => {
   if (!isGameFinished) {
@@ -27,6 +28,7 @@ let checkRowWin = ([row, column], lastMove) => {
   let currRow = [0, 1, 2].map(element => boardValues[Number(row) * 3 + Number(element)]);
   if (currRow.every(item => item === lastMove)) {
     gameWinner = lastMove;
+    gameHistory[lastMove] += 1;
     return isGameFinished = true;
   } else {
     return isGameFinished;
@@ -37,6 +39,7 @@ let checkColumnWin = ([row, column], lastMove) => {
   let currCol = [0, 1, 2].map(element => boardValues[Number(element) * 3 + Number(column)]);
   if (currCol.every(item => item === lastMove)) {
     gameWinner = lastMove;
+    gameHistory[lastMove] += 1;
     return isGameFinished = true;
   } else {
     return isGameFinished;
@@ -49,6 +52,7 @@ let checkDiagWin = (boxId, lastMove) => {
     return isGameFinished = true;
   } else if (['0,2', '1,1', '2,0'].includes(boxId) && [2, 4, 6].every(item => boardValues[item] === lastMove)) {
     gameWinner = lastMove;
+    gameHistory[lastMove] += 1;
     return isGameFinished = true;
   } else {
     return isGameFinished;
@@ -62,7 +66,7 @@ let checkAllWins = (boxId, lastMove) => {
     return gameWinner;
   } else if (boardValues.every(element => element !== '')) {
     isGameFinished = true;
-    alert('tie game');
+    gameHistory.tie += 1;
   }
 };
 
@@ -93,10 +97,11 @@ let addMove = function(boxId) {
 
 let resetBoard = function() {
   board.forEach(id => updateBox(id, ''))
-  nextMove = 'X';
+  nextMove = gameWinner === 'O' ? 'X' : 'O';
   isGameFinished = false;
   boardValues = new Array(9).fill('');
   gameWinner = null;
+  // does not clear gameHistory
 };
 
 let updateBox = function(boxId, value) {
