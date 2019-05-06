@@ -1,7 +1,7 @@
 // *** MODEL *** //
 
 let currentMove = 'X';
-
+let board = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 
 
 
@@ -19,21 +19,16 @@ let getNextMove = function() {
 
 let parseBoxId = string => positionArray = string.split(',');
 
-let editBox = function(value, input) {
-  // change box to specified value
-  console.log(typeof input, ' input: ', input);
-};
-
 let addMove = function(boxId) {
-  // check if box full - only call updateBox if empty
-  updateBox(boxId, getNextMove());
-}
+  if (document.getElementById(boxId).innerHTML === '') {
+    updateBox(boxId, getNextMove());
+  }
+};
 
 // *** VIEW *** //
 
 let resetBoard = function() {
-  // clear all entries of table
-  // iterate through boxes 0,0 to 2,2 and reset value to null
+  board.forEach(id => updateBox(id, ''));
 };
 
 let updateBox = function(boxId, value) {
