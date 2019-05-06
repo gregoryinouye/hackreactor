@@ -4,6 +4,7 @@ let currentMove = 'X';
 let board = ['0,0', '0,1', '0,2', '1,0', '1,1', '1,2', '2,0', '2,1', '2,2'];
 let boardValues = new Array(9).fill('');
 let isGameFinished = false;
+let rowColDiagList = 
 
 let checkGameStatus = () => {
   if (!isGameFinished) {
@@ -21,6 +22,18 @@ let updateBoardValue = (boxId, value) => {
   let index = board.indexOf(boxId);
   boardValues[index] = value;
 };
+
+let checkColumnWin = ([row, column]) {
+
+}
+
+let checkRowWin = ([row, column]) {
+
+}
+
+let checkDiagWin = ([row, column]) {
+  
+}
 
 // *** CONTROLLER *** //
 
@@ -54,5 +67,5 @@ let resetBoard = function() {
 };
 
 let updateBox = function(boxId, value) {
-  document.getElementById(boxId).innerHTML=value;
+  document.getElementById(boxId).innerHTML = value;
 }
