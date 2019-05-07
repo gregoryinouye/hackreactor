@@ -26,25 +26,19 @@ let updateBoardValue = (boxId, value) => {
   boardValues[index] = value;
 };
 
-let checkRowWin = ([row, column], lastMove) => {
+let hasRowWin = ([row, column], lastMove) => {
   let currRow = [0, 1, 2].map(element => boardValues[Number(row) * 3 + Number(element)]);
-  if (currRow.every(item => item === lastMove)) {
-    endGame(lastMove);
-  }
+  return currRow.every(item => item === lastMove);
 };
 
-let checkColumnWin = ([row, column], lastMove) => {
+let hasColumnWin = ([row, column], lastMove) => {
   let currCol = [0, 1, 2].map(element => boardValues[Number(element) * 3 + Number(column)]);
-  if (currCol.every(item => item === lastMove)) {
-    endGame(lastMove);
-  }
+  return currCol.every(item => item === lastMove);
 };
 
-let checkDiagWin = (boxId, lastMove) => {
-  if ((['0,0', '1,1', '2,2'].includes(boxId) && [0, 4, 8].every(item => boardValues[item] === lastMove)) ||
-  (['0,2', '1,1', '2,0'].includes(boxId) && [2, 4, 6].every(item => boardValues[item] === lastMove))) {
-    endGame(lastMove);
-  }
+let hasDiagWin = (boxId, lastMove) => {
+  return ((['0,0', '1,1', '2,2'].includes(boxId) && [0, 4, 8].every(item => boardValues[item] === lastMove)) ||
+  (['0,2', '1,1', '2,0'].includes(boxId) && [2, 4, 6].every(item => boardValues[item] === lastMove)));
 };
 
 let endGame = winner => {
@@ -56,7 +50,7 @@ let endGame = winner => {
 
 let checkAllWins = (boxId, lastMove) => {
   let locArr = parseBoxId(boxId);
-  if (checkRowWin(locArr, lastMove) || checkColumnWin(locArr, lastMove) || checkDiagWin(boxId, lastMove)) {
+  if (hasRowWin(locArr, lastMove) || hasColumnWin(locArr, lastMove) || hasDiagWin(boxId, lastMove)) {
     endGame(lastMove);
   } else if (boardValues.every(element => element !== '')) {
     endGame('tie');
@@ -81,7 +75,7 @@ let addMove = function(boxId) {
   if (boxId && document.getElementById(boxId).innerHTML === '' && !isGameFinished) {
     let value = getNextMove();
     updateBox(boxId, value);
-    updateBoardValue(boxId, value)
+    updateBoardValue(boxId, value);
     checkGameStatus(boxId, value);
   }
 };
