@@ -6,6 +6,8 @@ let boardValues = new Array(9).fill('');
 let isGameFinished = false;
 let gameWinner = null;
 let gameHistory = {X: 0, O: 0, tie: 0};
+let playerX = 'Player';
+let playerO = 'Player';
 
 let checkGameStatus = (boxId, lastMove) => {
   if (!isGameFinished) {
@@ -85,7 +87,7 @@ let getNextMove = function() {
 let parseBoxId = string => string.split(',');
 
 let addMove = function(boxId) {
-  if (document.getElementById(boxId).innerHTML === '' && !isGameFinished) {
+  if (boxId && document.getElementById(boxId).innerHTML === '' && !isGameFinished) {
     let value = getNextMove();
     updateBox(boxId, value);
     updateBoardValue(boxId, value)
@@ -95,7 +97,7 @@ let addMove = function(boxId) {
 
 // *** VIEW *** //
 
-let resetBoard = function() {
+let resetBoard = () => {
   board.forEach(id => updateBox(id, ''))
   nextMove = gameWinner === 'O' ? 'X' : 'O';
   isGameFinished = false;
@@ -104,6 +106,16 @@ let resetBoard = function() {
   // does not clear gameHistory
 };
 
-let updateBox = function(boxId, value) {
+let updateBox = (boxId, value) => {
   document.getElementById(boxId).innerHTML = value;
+}
+
+let addPlayerName = (letter, userInput) => {
+  if (letter === 'X') {
+    playerX = userInput || 'Player';
+  }
+  if (letter === 'O') {
+    playerO = userInput || 'Player';
+  }
+  document.querySelector('.history').innerHTML = `${playerX} X: ${gameHistory.X} vs ${playerO} O: ${gameHistory.O} || Tie: ${gameHistory.tie}`;
 }
