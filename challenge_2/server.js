@@ -17,6 +17,8 @@ const server = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({extended: false});
+const Handlebars = require('handlebars');
+// const ejs = require('ejs');
 
 server.listen(port, () => console.log(`Express server listening on port ${port}`));
 
@@ -28,20 +30,32 @@ server.get('/', (req, res) => {
   res.send('index.html')
 });
 
-server.use(bodyParser.json());
+// server.use(bodyParser.json());
+
+// <script id="csv" type="text/x-handlebards-template">
+// </script>
+
+let template = Handlebars.compile(
+  `<div>
+    {{#each csv}}
+      <div>{{this}}</div>
+    {{/each}}
+  </div>`);
 
 server.post('/', urlencodedParser, (req, res) => {
   console.log('POST request received');
   let jsonObj = jsonToObj(req.body.data);
   let csv = jsonToCsv(jsonObj);
-  res.redirect('http://127.0.0.1:8080');
-  res.end(csv);
+  console.log(csv)
+  let html = template({csv});
+  console.log(html)
+  // res.redirect('http://127.0.0.1:8080');
+  res.set('Content-Type', 'text/html');
+  res.send(new Buffer(html));
+  res.end();
 })
 
 server.use((req, res, next) => res.status(404).send('404 error'));
-
-
-// **** JSON to CSV **** //
 
 let jsonToObj = string => {
   let jsonData = 'Input must be in valid JSON format';
@@ -62,7 +76,9 @@ let jsonToCsv = obj => {
 
   let getObj = tree => {
     objArr.push(tree);
-    tree.children.forEach(child => getObj(child));
+    if (tree.children) {
+      tree.children.forEach(child => getObj(child));
+    }
   }
 
   getObj(obj);
@@ -79,5 +95,5 @@ let jsonToCsv = obj => {
     });
     result.push(current.join(','));
   });
-  return result.join('\n');
+  return result;
 };
