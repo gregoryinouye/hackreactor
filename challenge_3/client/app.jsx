@@ -72,13 +72,44 @@ class Checkout extends React.Component {
 class FormOne extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({[event.target.id]: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log(JSON.stringify(this.state));
+    this.props.next();
   }
 
   render() {
-    return <div>Form One
-      <button onClick={this.props.next}>Next</button>
-    </div>
+    return <div>
+      <h3>Form One</h3>
+      <form onSubmit={this.handleSubmit}>
+        <label>Name:
+          <input type="text" id="name" value={this.state.name} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Email:
+          <input type="text" id="email" value={this.state.email} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Password:
+          <input type="text" id="password" value={this.state.password} onChange={this.handleChange} required/>
+        </label>
+        <button type="button" onClick={this.handleSubmit}>Next</button>
+        {/* <input type="submit" value="Next"/> */}
+      </form>
+      </div>
   }
 }
 
@@ -132,7 +163,3 @@ class Completed extends React.Component {
 ReactDOM.render(
   <App/>, document.getElementById('app')
 );
-
-
-// import React from 'react';
-// import ReactDOM from 'react-dom';
