@@ -32,13 +32,52 @@ server.use(bodyParser.json());
 
 server.post('/', urlencodedParser, (req, res) => {
   console.log('POST request received');
-  console.log(req.body.body);
-  console.log(typeof req.body.body);
+  let jsonObj = jsonToObj(req.body.data);
+  let csv = jsonToCsv(jsonObj);
   res.redirect('http://127.0.0.1:8080');
-  res.json();
+  res.end(csv);
 })
 
 server.use((req, res, next) => res.status(404).send('404 error'));
 
 
 // **** JSON to CSV **** //
+
+let jsonToObj = string => {
+  let jsonData = 'Input must be in valid JSON format';
+  try {
+    jsonData = string[string.length - 1] === ';' ? JSON.parse(string.slice(0, string.length - 1)) : JSON.parse(string);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    return jsonData;
+  }
+};
+
+let jsonToCsv = obj => {
+  let objArr = [];
+  let csv = new Set();
+  let columns = [];
+  let result = [];
+
+  let getObj = tree => {
+    objArr.push(tree);
+    tree.children.forEach(child => getObj(child));
+  }
+
+  getObj(obj);
+
+  objArr.forEach(node => Object.keys(node).forEach(prop => csv.add(prop)));
+  csv.forEach(title => columns.push(title));
+  result.push(columns.join(','));
+  objArr.forEach(node => {
+    let current = [];
+    csv.forEach(prop => {
+      if (prop !== 'children') {
+        current.push(node[prop] ? node[prop] : null);
+      }
+    });
+    result.push(current.join(','));
+  });
+  return result.join('\n');
+};
