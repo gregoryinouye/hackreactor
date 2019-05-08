@@ -19,11 +19,7 @@ class App extends React.Component {
   };
 
   checkout() {
-    // e => {
-    //   e.preventDefault();
-      console.log('start checkout');
-      this.setState({showCheckout: false, showFormOne: true});
-    // }
+    this.setState({showCheckout: false, showFormOne: true});
   };
 
   submitFormOne() {
@@ -119,12 +115,58 @@ class FormOne extends React.Component {
 class FormTwo extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      shippingAddress1: '',
+      shippingAddress2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      phoneNumber: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleChange(event) {
+    this.setState({[event.target.id]: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log(JSON.stringify(this.state));
+    this.props.next();
   }
 
   render() {
-    return <div>Form Two
-      <button onClick={this.props.next}>Next</button>
-    </div>
+    return <div>
+      <h3>Form Two</h3>
+      <form onSubmit={this.handleSubmit}>
+        <label>Shipping Address Line 1:
+          <input type="text" id="shippingAddress1" value={this.state.shippingAddress1} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Shipping Address Line 2:
+          <input type="text" id="shippingAddress2" value={this.state.shippingAddress2} onChange={this.handleChange}/>
+        </label>
+        <br></br>
+        <label>City:
+          <input type="text" id="city" value={this.state.city} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>State:
+          <input type="text" id="state" value={this.state.state} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Zip Code:
+          <input type="text" id="zipcode" value={this.state.zipcode} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Phone Number:
+          <input type="text" id="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
+        </label>
+        <button type="button" onClick={this.handleSubmit}>Next</button>
+      </form>
+      </div>
   }
 }
 
@@ -134,12 +176,48 @@ class FormTwo extends React.Component {
 class FormThree extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      creditCardNumber: '',
+      expirationDate: '',
+      cvv: '',
+      billingZipCode: '',
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleChange(event) {
+    this.setState({[event.target.id]: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log(JSON.stringify(this.state));
+    this.props.next();
   }
 
   render() {
-    return <div>Form Three
-      <button onClick={this.props.next}>Submit</button>
-    </div>
+    return <div>
+      <h3>Form Three</h3>
+      <form onSubmit={this.handleSubmit}>
+        <label>Credit Card Number:
+          <input type="text" id="creditCardNumber" value={this.state.shippingAddress1} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Expiration Date:
+          <input type="text" id="expirationDate" value={this.state.shippingAddress2} onChange={this.handleChange}/>
+        </label>
+        <br></br>
+        <label>CVV:
+          <input type="text" id="cvv" value={this.state.city} onChange={this.handleChange} required/>
+        </label>
+        <br></br>
+        <label>Billing Zip Code:
+          <input type="text" id="billingZipCode" value={this.state.state} onChange={this.handleChange} required/>
+        </label>
+        <button type="button" onClick={this.handleSubmit}>Submit</button>
+      </form>
+      </div>
   }
 }
 
