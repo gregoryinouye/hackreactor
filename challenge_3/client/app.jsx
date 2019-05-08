@@ -8,13 +8,15 @@ class App extends React.Component {
       showFormOne: false,
       showFormTwo: false,
       showFormThree: false,
-      showCompleted: false,
+      showConfirmation: false,
+      showCompleted: false
     };
 
     this.checkout = this.checkout.bind(this);
     this.submitFormOne = this.submitFormOne.bind(this);
     this.submitFormTwo = this.submitFormTwo.bind(this);
     this.submitFormThree = this.submitFormThree.bind(this);
+    this.purchase = this.purchase.bind(this);
     this.reset = this.reset.bind(this);
   };
 
@@ -31,7 +33,11 @@ class App extends React.Component {
   }
 
   submitFormThree() {
-    this.setState({showFormThree: false, showCompleted: true});
+    this.setState({showFormThree: false, showConfirmation: true});
+  }
+
+  purchase() {
+    this.setState({showConfirmation: false, showCompleted: true})
   }
 
   reset() {
@@ -44,6 +50,7 @@ class App extends React.Component {
       {this.state.showFormOne ? <FormOne next={this.submitFormOne}/> : null}
       {this.state.showFormTwo ? <FormTwo next={this.submitFormTwo}/> : null}
       {this.state.showFormThree ? <FormThree next={this.submitFormThree}/> : null}
+      {this.state.showConfirmation ? <Confirmation next={this.purchase}/> : null}
       {this.state.showCompleted ? <Completed next={this.reset}/> : null}
     </div>
   };
@@ -215,11 +222,27 @@ class FormThree extends React.Component {
         <label>Billing Zip Code:
           <input type="text" id="billingZipCode" value={this.state.state} onChange={this.handleChange} required/>
         </label>
-        <button type="button" onClick={this.handleSubmit}>Submit</button>
+        <button type="button" onClick={this.handleSubmit}>Next</button>
       </form>
       </div>
   }
 }
+
+// **** CONFIRMATION COMPONENT **** //
+
+class Confirmation extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return <div>
+      <h3>Confirmation</h3>
+      <button onClick={this.props.next}>Purchase</button>
+    </div>
+  }
+}
+
 
 // **** COMPLETED COMPONENT **** //
 
@@ -229,8 +252,9 @@ class Completed extends React.Component {
   }
 
   render() {
-    return <div>Completed
-      <button onClick={this.props.next}>Reset</button>
+    return <div>
+      <h3>Purchase Completed</h3>
+      <button onClick={this.props.next}>Shop Again</button>
     </div>
   }
 }
