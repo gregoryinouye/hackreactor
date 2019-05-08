@@ -15,6 +15,8 @@ You may also assume that child records in the JSON will always be in a property 
 const express = require('express');
 const server = express();
 const port = 3000;
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 server.listen(port, () => console.log(`Express server listening on port ${port}`));
 
@@ -26,12 +28,17 @@ server.get('/', (req, res) => {
   res.send('index.html')
 });
 
-// post method to receive JSON input
-server.post('/', (req, res) => {
+server.use(bodyParser.json());
+
+server.post('/', urlencodedParser, (req, res) => {
   console.log('POST request received');
-  console.log(req.body);
+  console.log(req.body.body);
+  console.log(typeof req.body.body);
   res.redirect('http://127.0.0.1:8080');
-  // res.send('POST request received');
+  res.json();
 })
 
 server.use((req, res, next) => res.status(404).send('404 error'));
+
+
+// **** JSON to CSV **** //
