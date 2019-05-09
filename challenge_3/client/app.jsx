@@ -66,7 +66,7 @@ class App extends React.Component {
       shippingAddress2: this.state.shippingAddress2,
       city: this.state.city,
       state: this.state.state,
-      zipcode: this.state.state,
+      zipcode: this.state.zipcode,
       phoneNumber: this.state.phoneNumber,
       creditCardNumber: this.state.creditCardNumber,
       expirationDate: this.state.expirationDate,
