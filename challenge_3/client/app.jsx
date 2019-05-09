@@ -10,25 +10,18 @@ class App extends React.Component {
       showFormThree: false,
       showConfirmation: false,
       showCompleted: false,
-      formOne: {
-        name: '',
-        email: '',
-        password: ''
-      },
-      formTwo: {
-        shippingAddress1: '',
-        shippingAddress2: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        phoneNumber: ''
-      },
-      formThree: {
-        creditCardNumber: '',
-        expirationDate: '',
-        cvv: '',
-        billingZipCode: '',
-      }
+      name: null,
+      email: null,
+      password: null,
+      shippingAddress1: null,
+      shippingAddress2: null,
+      city: null,
+      zipcode: null,
+      phoneNumber: null,
+      creditCardNumber: null,
+      expirationDate: null,
+      cvv: null,
+      billingZipCode: null
     };
 
     this.checkout = this.checkout.bind(this);
@@ -43,19 +36,40 @@ class App extends React.Component {
     this.setState({showCheckout: false, showFormOne: true});
   };
 
-  submitFormOne() {
+  submitFormOne(data) {
+    for (let key in data) {
+      this.setState({[key]: data[key]});
+    }
     this.setState({showFormOne: false, showFormTwo: true});
   }
 
-  submitFormTwo() {
+  submitFormTwo(data) {
+    for (let key in data) {
+      this.setState({[key]: data[key]});
+    }
     this.setState({showFormTwo: false, showFormThree: true});
   }
 
-  submitFormThree() {
+  submitFormThree(data) {
+    for (let key in data) {
+      this.setState({[key]: data[key]});
+    }
     this.setState({showFormThree: false, showConfirmation: true});
   }
 
   purchase() {
+    let userData = {name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      shippingAddress1: this.state.shippingAddress1,
+      shippingAddress2: this.state.shippingAddress2,
+      city: this.state.city,
+      zipcode: this.state.state,
+      phoneNumber: this.state.phoneNumber,
+      creditCardNumber: this.state.creditCardNumber,
+      expirationDate: this.state.expirationDate,
+      cvv: this.state.cvv,
+      billingZipCode: this.state.billingZipCode};
     this.setState({showConfirmation: false, showCompleted: true})
   }
 
@@ -66,10 +80,10 @@ class App extends React.Component {
   render() {
     return <div className="App">
       {this.state.showCheckout ? <Checkout next={this.checkout}/> : null}
-      {this.state.showFormOne ? <FormOne data={this.state.formOne} next={this.submitFormOne}/> : null}
-      {this.state.showFormTwo ? <FormTwo data={this.state.formTwo} next={this.submitFormTwo}/> : null}
-      {this.state.showFormThree ? <FormThree data={this.state.formThree} next={this.submitFormThree}/> : null}
-      {this.state.showConfirmation ? <Confirmation dataOne={this.state.formOne} dataTwo={this.state.formTwo} dataThree={this.state.formThree} next={this.purchase}/> : null}
+      {this.state.showFormOne ? <FormOne next={this.submitFormOne}/> : null}
+      {this.state.showFormTwo ? <FormTwo next={this.submitFormTwo}/> : null}
+      {this.state.showFormThree ? <FormThree next={this.submitFormThree}/> : null}
+      {this.state.showConfirmation ? <Confirmation data={this.state} next={this.purchase}/> : null}
       {this.state.showCompleted ? <Completed next={this.reset}/> : null}
     </div>
   };
@@ -94,6 +108,11 @@ class Checkout extends React.Component {
 class FormOne extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -104,8 +123,7 @@ class FormOne extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(JSON.stringify(this.props.data));
-    this.props.next();
+    this.props.next(this.state);
   }
 
   render() {
@@ -113,15 +131,15 @@ class FormOne extends React.Component {
       <h3>Form One</h3>
       <form onSubmit={this.handleSubmit}>
         <label>Name:
-          <input type="text" id="name" value={this.props.data.name} onChange={this.handleChange} required/>
+          <input type="text" id="name" value={this.state.name} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Email:
-          <input type="text" id="email" value={this.props.data.email} onChange={this.handleChange} required/>
+          <input type="text" id="email" value={this.state.email} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Password:
-          <input type="text" id="password" value={this.props.data.password} onChange={this.handleChange} required/>
+          <input type="text" id="password" value={this.state.password} onChange={this.handleChange} required/>
         </label>
         <button type="button" onClick={this.handleSubmit}>Next</button>
         {/* <input type="submit" value="Next"/> */}
@@ -136,6 +154,14 @@ class FormOne extends React.Component {
 class FormTwo extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        shippingAddress1: '',
+        shippingAddress2: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        phoneNumber: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -146,8 +172,7 @@ class FormTwo extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(JSON.stringify(this.props.data));
-    this.props.next();
+    this.props.next(this.state);
   }
 
   render() {
@@ -155,27 +180,27 @@ class FormTwo extends React.Component {
       <h3>Form Two</h3>
       <form onSubmit={this.handleSubmit}>
         <label>Shipping Address Line 1:
-          <input type="text" id="shippingAddress1" value={this.props.shippingAddress1} onChange={this.handleChange} required/>
+          <input type="text" id="shippingAddress1" value={this.state.shippingAddress1} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Shipping Address Line 2:
-          <input type="text" id="shippingAddress2" value={this.props.shippingAddress2} onChange={this.handleChange}/>
+          <input type="text" id="shippingAddress2" value={this.state.shippingAddress2} onChange={this.handleChange}/>
         </label>
         <br></br>
         <label>City:
-          <input type="text" id="city" value={this.props.city} onChange={this.handleChange} required/>
+          <input type="text" id="city" value={this.state.city} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>State:
-          <input type="text" id="state" value={this.props.state} onChange={this.handleChange} required/>
+          <input type="text" id="state" value={this.state.state} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Zip Code:
-          <input type="text" id="zipcode" value={this.props.zipcode} onChange={this.handleChange} required/>
+          <input type="text" id="zipcode" value={this.state.zipcode} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Phone Number:
-          <input type="text" id="phoneNumber" value={this.props.phoneNumber} onChange={this.handleChange} required/>
+          <input type="text" id="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange} required/>
         </label>
         <button type="button" onClick={this.handleSubmit}>Next</button>
       </form>
@@ -189,7 +214,13 @@ class FormTwo extends React.Component {
 class FormThree extends React.Component {
   constructor(props) {
     super(props);
-    
+    this.state = {
+        creditCardNumber: '',
+        expirationDate: '',
+        cvv: '',
+        billingZipCode: '',
+    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -199,8 +230,7 @@ class FormThree extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(JSON.stringify(this.props.data));
-    this.props.next();
+    this.props.next(this.state);
   }
 
   render() {
@@ -208,19 +238,19 @@ class FormThree extends React.Component {
       <h3>Form Three</h3>
       <form onSubmit={this.handleSubmit}>
         <label>Credit Card Number:
-          <input type="text" id="creditCardNumber" value={this.props.shippingAddress1} onChange={this.handleChange} required/>
+          <input type="text" id="creditCardNumber" value={this.state.shippingAddress1} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Expiration Date:
-          <input type="text" id="expirationDate" value={this.props.shippingAddress2} onChange={this.handleChange}/>
+          <input type="text" id="expirationDate" value={this.state.shippingAddress2} onChange={this.handleChange}/>
         </label>
         <br></br>
         <label>CVV:
-          <input type="text" id="cvv" value={this.props.city} onChange={this.handleChange} required/>
+          <input type="text" id="cvv" value={this.state.city} onChange={this.handleChange} required/>
         </label>
         <br></br>
         <label>Billing Zip Code:
-          <input type="text" id="billingZipCode" value={this.props.billingZipCode} onChange={this.handleChange} required/>
+          <input type="text" id="billingZipCode" value={this.state.billingZipCode} onChange={this.handleChange} required/>
         </label>
         <button type="button" onClick={this.handleSubmit}>Next</button>
       </form>
@@ -238,9 +268,7 @@ class Confirmation extends React.Component {
   render() {
     return <div>
       <h3>Confirmation</h3>
-      <div>{JSON.stringify(this.props.dataOne)}</div>
-      <div>{JSON.stringify(this.props.dataTwo)}</div>
-      <div>{JSON.stringify(this.props.dataThree)}</div>
+      <div>{JSON.stringify(this.props.data)}</div>
       <button onClick={this.props.next}>Purchase</button>
     </div>
   }
