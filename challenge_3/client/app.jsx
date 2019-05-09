@@ -58,19 +58,27 @@ class App extends React.Component {
   }
 
   purchase() {
-    let userData = {name: this.state.name,
+    let userData = {
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       shippingAddress1: this.state.shippingAddress1,
       shippingAddress2: this.state.shippingAddress2,
       city: this.state.city,
+      state: this.state.state,
       zipcode: this.state.state,
       phoneNumber: this.state.phoneNumber,
       creditCardNumber: this.state.creditCardNumber,
       expirationDate: this.state.expirationDate,
       cvv: this.state.cvv,
-      billingZipCode: this.state.billingZipCode};
-    this.setState({showConfirmation: false, showCompleted: true})
+      billingZipCode: this.state.billingZipCode
+    };
+    console.log('post attempt');
+    axios.post('http://localhost:3000/purchase', userData)
+      .then(data => {
+        console.log('POST successful: ', data);
+        this.setState({showConfirmation: false, showCompleted: true});
+      }).catch(err => console.error(err));
   }
 
   reset() {

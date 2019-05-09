@@ -11,6 +11,7 @@ CREATE TABLE users
   shippingAddress1 VARCHAR(50),
   shippingAddress2 VARCHAR(50),
   city VARCHAR(50),
+  state VARCHAR(50),
   zipcode INT,
   phoneNumber INT,
   creditCardNumber INT,
