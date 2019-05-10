@@ -6,6 +6,8 @@ class Search extends React.Component {
     this.state = {
       term: ''
     }
+
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange (e) {
