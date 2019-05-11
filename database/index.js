@@ -21,9 +21,10 @@ let Repo = mongoose.model('Repo', repoSchema);
 let save = (repos, callback) => {
   Repo.insertMany(repos, {ordered: false}, (err, data) => {
     if (err) {
-      console.error.apply(console, ['connection error: ', err]);
+      console.error.apply(console, ['ERROR: ', err]);
+      callback(err);
     } else {
-      callback(data);
+      callback(null, data);
     }
   });
 }
@@ -31,7 +32,8 @@ let save = (repos, callback) => {
 let find = (callback) => {
   Repo.find({}, {}, {limit: 25}, (err, data) => {
     if (err) {
-      console.error('this is the error msg ', err);
+      console.error('ERROR: ', err);
+      callback(err);
     } else {
       callback(null, data);
     }

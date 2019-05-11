@@ -12,6 +12,7 @@ app.post('/repos', urlencodedParser, function (req, res) {
   github.getReposByUsername(req.body.username, (err, data) => {
     if (err) {
       console.error(err);
+      res.status(404).end();
     } else {
       let parsedRepos = JSON.parse(data).map(repo => {
         return {
@@ -23,19 +24,28 @@ app.post('/repos', urlencodedParser, function (req, res) {
           description: repo.description
         }
       });
-      db.save(parsedRepos, console.log);
+      db.save(parsedRepos, (err, data) => {
+        if (err) {
+          console.error(err);
+          res.status(404).end();
+        } else {
+          res.status(200).end();
+        }
+      });
     }
   });
-  res.end();
 });
 
 app.get('/repos', function (req, res) {
   db.find((err, data) => {
     if (err) {
-      console.log('error: ', err);
+      console.error('ERROR: ', err);
+      res.status(404).res.end();
     } else {
+      console.log('GET received');
+      console.log(data);
       res.status(200);
-      res.send(data);
+      res.json(data);
       res.end();
     }
   });

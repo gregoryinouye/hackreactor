@@ -13,23 +13,26 @@ class App extends React.Component {
 
   }
 
+  updateRepoList() {
+    $.get('/repos', {}, (data) => {
+      this.setState({repos: data});
+    });
+  }
+
   search (term) {
     console.log(`${term} was searched`);
-    $.post('/repos', {username: term}, (err, data) => {
-      if (err) {
-        console.error(err);
-      } else {
-        // insert data into database
-        console.log('received: ', data);
-      }
-    }, 'json');
+    $.post('/repos', {username: term});
+  }
+
+  componentDidMount() {
+    this.updateRepoList.call(this);
   }
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }
