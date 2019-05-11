@@ -18,9 +18,8 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (entry, callback) => {
-  let newRecord = new Repo(entry);
-  newRecord.save((err, data) => {
+let save = (repos, callback) => {
+  Repo.insertMany(repos, {ordered: false}, (err, data) => {
     if (err) {
       console.error.apply(console, ['connection error: ', err]);
     } else {

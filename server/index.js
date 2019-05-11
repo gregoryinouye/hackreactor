@@ -15,16 +15,17 @@ app.post('/repos', urlencodedParser, function (req, res) {
   // save the repo information in the database
   console.log('sending GET to GitHub for: ', req.body.username);
   github.getReposByUsername(req.body.username, (err, data) => {
-    // process the data by copying over keys of interest
-    // save to database
-    // console.log(data);
-    db.save({
-      _id: 2, 
-      name: 'john', 
-      owner: 'john', 
-      html_url: 'www.google.com',
-      updated_at: '2016-12-06T13:06:37Z',
-      description: 'this apple'}, console.log);
+    let parsedRepos = JSON.parse(data).map(repo => {
+      return {
+        _id: repo.id,
+        name: repo.name,
+        owner: repo.owner.login,
+        html_url: repo.html_url,
+        updated_at: repo.updated_at,
+        description: repo.description
+      }
+    });
+    db.save(parsedRepos, console.log);
     console.log.call(console, 'now should cause page refresh or send data?');
   });
   // send repos to page
