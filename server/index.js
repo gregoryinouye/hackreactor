@@ -9,11 +9,6 @@ let app = express();
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', urlencodedParser, function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
-  console.log('sending GET to GitHub for: ', req.body.username);
   github.getReposByUsername(req.body.username, (err, data) => {
     let parsedRepos = JSON.parse(data).map(repo => {
       return {
@@ -37,12 +32,11 @@ app.get('/repos', function (req, res) {
     if (err) {
       console.log('error: ', err);
     } else {
-      res.status(200)
+      res.status(200);
       res.send(data);
+      res.end();
     }
-  })
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  });
 });
 
 let port = 1128;
