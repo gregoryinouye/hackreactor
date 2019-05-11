@@ -8,7 +8,7 @@ let getReposByUsername = (username, callback) => {
   // The options object has been provided to help you out, 
   // but you'll have to fill in the URL
   let options = {
-    url: 'https://api.github.com',
+    url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`,
@@ -16,13 +16,14 @@ let getReposByUsername = (username, callback) => {
     }
   };
 
-  request.get(`https://api.github.com/:users/:${username}/repos`, options, (err, data) => {
+  request.get(options, (err, response, body) => {
     if (err) {
       console.error(err);
     } else {
       // insert data into database
-      console.log('received: ', data);
-      callback(data);
+      console.log('statuscode: ', response && response.statusCode);
+      console.log('body: ', body);
+      callback(null, body);
     }
   });
 }
