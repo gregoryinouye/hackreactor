@@ -29,7 +29,13 @@ let save = (repos, callback) => {
 }
 
 let find = (callback) => {
-  let repoList = Repo.find({}, callback);
+  Repo.find({}, {}, {limit: 25}, (err, data) => {
+    if (err) {
+      console.error('this is the error msg ', err);
+    } else {
+      callback(null, data);
+    }
+  }).sort('-updated_at');
 }
 
 module.exports.save = save;

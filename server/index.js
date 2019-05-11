@@ -10,25 +10,27 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', urlencodedParser, function (req, res) {
   github.getReposByUsername(req.body.username, (err, data) => {
-    let parsedRepos = JSON.parse(data).map(repo => {
-      return {
-        _id: repo.id,
-        name: repo.name,
-        owner: repo.owner.login,
-        html_url: repo.html_url,
-        updated_at: repo.updated_at,
-        description: repo.description
-      }
-    });
-    db.save(parsedRepos, console.log);
-    console.log.call(console, 'now should cause page refresh or send data?');
+    if (err) {
+      console.error(err);
+    } else {
+      let parsedRepos = JSON.parse(data).map(repo => {
+        return {
+          _id: repo.id,
+          name: repo.name,
+          owner: repo.owner.login,
+          html_url: repo.html_url,
+          updated_at: repo.updated_at,
+          description: repo.description
+        }
+      });
+      db.save(parsedRepos, console.log);
+    }
   });
-  // send repos to page
   res.end();
 });
 
 app.get('/repos', function (req, res) {
-  db.find((err, docs) => {
+  db.find((err, data) => {
     if (err) {
       console.log('error: ', err);
     } else {
