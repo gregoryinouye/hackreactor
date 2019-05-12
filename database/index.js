@@ -11,6 +11,8 @@ let repoSchema = mongoose.Schema({
   _id: Number,
   name: String,
   owner: String,
+  owner_avatar: String,
+  owner_url: String,
   html_url: String,
   updated_at: Date,
   description: String

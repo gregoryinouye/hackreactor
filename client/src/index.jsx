@@ -11,6 +11,7 @@ class App extends React.Component {
       repos: []
     }
 
+    this.updateRepoList = this.updateRepoList.bind(this);
   }
 
   updateRepoList() {
@@ -21,11 +22,11 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    $.post('/repos', {username: term});
+    $.post('/repos', {username: term}, this.updateRepoList);
   }
 
   componentDidMount() {
-    this.updateRepoList.call(this);
+    this.updateRepoList();
   }
 
   render () {

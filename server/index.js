@@ -19,6 +19,8 @@ app.post('/repos', urlencodedParser, function (req, res) {
           _id: repo.id,
           name: repo.name,
           owner: repo.owner.login,
+          owner_avatar: repo.owner.avatar_url,
+          owner_url: repo.owner.html_url,
           html_url: repo.html_url,
           updated_at: repo.updated_at,
           description: repo.description

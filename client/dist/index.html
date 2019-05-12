@@ -1,8 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <title>Github Repo Fetcher</title>
 </head>
+<style>
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .repoList {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .repoEntry {
+    border: 2px, black;
+    margin: 5px;
+    padding: 5px;
+    float: left;
+    width: 30%;
+    height: 100px;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .repoData {
+    display: inline;
+    margin: 10px;
+  }
+
+  .repoEntryTitle {
+    font-size: 25px;
+  }
+</style>
 <body>
 <div id="app"></div>
 <script type="text/javascript" src="bundle.js"></script>
