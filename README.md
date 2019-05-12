@@ -32,16 +32,16 @@ Level 3
  Add a button to each list item that allows the user to toggle a 'watched' property.
  Add two buttons to allow the users to toggle between a list of 'watched' movies and movies 'to watch'.
 
- Level 4
+Level 4
  Add a panel of movie information that appears when the title is clicked (consider starting with hardcoded information)
  Refactor the watch toggle to be part of the movie information panel
  Get movie information from the The Movie Database API (https://www.themoviedb.org/documentation/api)
 
- You've reached the end of the front end levels! To proceed to the server levels, check out level 5!
+You've reached the end of the front end levels!
 
 If you don't want to start servers yet, but want to add more to your front end, here are some bonus ideas:
 
-Other ideas (not pictured)
+Other ideas:
  Think about when it makes sense to request this information from the api - when the user clicks on the title? When the movie gets added? Refactor your code as necessary.
  Add a way for the user to add their own rating
  Add a sorting mechanism so the user can sort on rating or other properties
