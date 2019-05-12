@@ -1,5 +1,6 @@
 import React from 'react';
-import MovieList from './movieList.jsx';
+import MovieList from './MovieList.jsx';
+import Search from './Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <div><MovieList movies={this.state.movies}/></div>
+    return <div><Search/><MovieList movies={this.state.movies}/></div>
   }
 }
 

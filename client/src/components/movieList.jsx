@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieListEntry from './movieListEntry.jsx';
+import MovieListEntry from './MovieListEntry.jsx';
 
 class MovieList extends React.Component {
   constructor(props) {
