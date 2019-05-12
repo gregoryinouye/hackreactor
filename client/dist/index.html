@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <title>Github Repo Fetcher</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab:100,300" rel="stylesheet">
+  <title>GitHub Fetcher</title>
 </head>
 <style>
-
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
 
   h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Slab', serif;
+    font-size: 50px;
+    font-weight: 100;
+    
+  }
+
+  h4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    text-align: center;
   }
 
   .repoList {
@@ -22,23 +30,30 @@
   }
 
   .repoEntry {
-    border: 2px, black;
     margin: 5px;
     padding: 5px;
     float: left;
-    width: 30%;
+    width: 350px;
     height: 100px;
-    overflow: hidden;
-    flex-direction: column;
+  }
+
+  .owner_avatar {
+    float: left;
+    margin-right: 10px;
   }
 
   .repoData {
-    display: inline;
-    margin: 10px;
+    /* background-color: red; */
+    vertical-align: top;
+    margin-left: 10px;
   }
 
   .repoEntryTitle {
     font-size: 25px;
+  }
+
+  button {
+    margin-left: 8px;
   }
 </style>
 <body>
