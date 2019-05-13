@@ -1,16 +1,10 @@
 import React from 'react';
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: ''
-    }
-  }
-
-  render() {
-    return <form><input name="searchbar"></input><button type="submit">Go!</button></form>
-  }
-}
+var Search = (props) => (
+  <form>
+    <input name="searchbar" type="text" value={props.searchTerm} onChange={props.handleSearch}></input>
+    <button type="button" value={props.searchTerm} onClick={props.handleSubmit}>Search</button>
+  </form>
+);
 
 export default Search;
