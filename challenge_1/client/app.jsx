@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
+import axios from 'axios';
 
 import EventList from './EventList.jsx';
 
@@ -9,7 +10,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 50,
+      events: [],
+      pageCount: 0,
       query: '',
     };
 
@@ -25,9 +27,22 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
+    const { query } = this.state;
     e.preventDefault();
     // send GET
-    console.log('searched!');
+    axios.get('/events', {
+      params: {
+        q: query,
+        _page: 1,
+        _limit: 10,
+      },
+    })
+    .then(response => {
+      this.setState({ events: response.data });
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
 
   handlePageClick(e) {
@@ -35,7 +50,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { query } = this.state;
+    const { events, pageCount, query } = this.state;
 
     return (
       <div>
@@ -45,14 +60,13 @@ class App extends React.Component {
           <label>Query:</label> <input type="text" name="query" value={query} onChange={this.handleChange} /> <input type="submit" />
         </form>
         <br></br>
-        <EventList events={[]}/>
-        <br></br>
+        <EventList events={events}/>
         <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={this.state.pageCount}
+          pageCount={pageCount}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
