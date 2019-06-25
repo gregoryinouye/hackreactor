@@ -11,6 +11,7 @@ class App extends React.Component {
 
     this.state = {
       events: [],
+      lastSearch: '',
       pageCount: 0,
       query: '',
     };
@@ -29,24 +30,28 @@ class App extends React.Component {
   handleSubmit(e) {
     const { query } = this.state;
     e.preventDefault();
-    // send GET
+    this.searchEvents(query, 1);
+  }
+
+  handlePageClick(e) {
+    const {lastSearch } = this.state;
+    this.searchEvents(lastSearch, e.selected + 1);
+  }
+
+  searchEvents(query, numPage) {
     axios.get('/events', {
       params: {
         q: query,
-        _page: 1,
+        _page: numPage,
         _limit: 10,
       },
     })
     .then(response => {
-      this.setState({ events: response.data });
+      this.setState({ events: response.data, lastSearch: query, pageCount: Math.ceil(Number(response.headers['x-total-count']) / 10) });
     })
     .catch(error => {
       console.error(error);
     });
-  }
-
-  handlePageClick(e) {
-    console.log(`page change to ${e.selected}`);
   }
 
   render() {
