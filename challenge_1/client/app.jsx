@@ -21,6 +21,10 @@ class App extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
   }
 
+  componentDidMount() {
+    this.searchEvents('', 1);
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     e.preventDefault();
@@ -34,7 +38,7 @@ class App extends React.Component {
   }
 
   handlePageClick(e) {
-    const {lastSearch } = this.state;
+    const { lastSearch } = this.state;
     this.searchEvents(lastSearch, e.selected + 1);
   }
 
@@ -59,10 +63,10 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>Historical Event Finder</div>
+        <div style={{textAlign: "center", fontSize: "28px"}}>Historical Event Finder</div>
         <br></br>
-        <form onSubmit={this.handleSubmit}>
-          <label>Query:</label> <input type="text" name="query" value={query} onChange={this.handleChange} /> <input type="submit" />
+        <form onSubmit={this.handleSubmit} style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+          <label htmlFor="query">Search Events:</label> <input type="text" name="query" value={query} onChange={this.handleChange} /> <input type="submit" value="Search" />
         </form>
         <br></br>
         <EventList events={events}/>
