@@ -1,0 +1,31 @@
+{
+  "name": "cryptocurrencychartingtool",
+  "version": "1.0.0",
+  "description": "Cryptocurrency Charting Tool",
+  "main": "client/app.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregoryinouye/hrsf116-mini-apps-2.git"
+  },
+  "author": "Gregory Inouye",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregoryinouye/hrsf116-mini-apps-2/issues"
+  },
+  "homepage": "https://github.com/gregoryinouye/hrsf116-mini-apps-2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6"
+  }
+}
