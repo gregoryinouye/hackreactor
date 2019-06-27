@@ -15,8 +15,8 @@ class App extends React.Component {
     };
     
     this.handleChange = this.handleChange.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   getBitcoinData() {
@@ -43,9 +43,9 @@ class App extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleCheck(e) {
+  handleToggle(e) {
     const { isApiRequest } = this.state;
-    this.setState({ isApiRequest: !isApiRequest })
+    this.setState({ isApiRequest: !isApiRequest });
   }
 
   handleSubmit(e) {
@@ -98,13 +98,12 @@ class App extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="currency">Select a cryptocurrency:</label>
-            <select name="currency" value={currency} onChange={this.handleChange} style={{ margin: "5px" }}>
+            <select name="currency" value={currency} onChange={this.handleToggle} style={{ margin: "5px" }}>
               <option value="" hidden>Select one</option>
               <option value="BTC">Bitcoin</option>
-              <option value="ETH">Ethereum</option>
             </select>
-            <label style={{ padding: "0px 3px 0px 0px" }} htmlFor="isApiRequest">Check to get live data:</label>
-            <input type="checkbox" name="isApiRequest" checked={isApiRequest} onChange={this.handleCheck} />
+            <label style={{ padding: "0px 3px 0px 0px" }} htmlFor="isApiRequest">Live Data:</label>
+            <button type="button" name="isApiRequest" onClick={this.handleToggle}>{isApiRequest ? 'Disable' : 'Enable'}</button>
             <input type="submit" value="Submit" style={{ margin: "5px" }}/>
           </form>
           

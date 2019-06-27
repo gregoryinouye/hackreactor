@@ -25,7 +25,9 @@ app.get('/bitcoin', (req, res) => {
       console.error(error)
     });
   } else {
-    // send data from cache
+    // check if data is available from cache
+    // if true, then send data from cache
+    // else return error
     res.status(404).send('No cached data available');
   }
 });
