@@ -5,6 +5,7 @@
   "main": "./client/app.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server data/db.json",
     "webpack": "webpack -d --watch"
   },
   "repository": {
