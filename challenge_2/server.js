@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/bitcoin', (req, res) => {
-  const { start, end, currency, isApiRequest  } = req.query;
+  const { start, end, currency, isApiRequest } = req.query;
 
   if (isApiRequest === 'true') {
     axios.get(`https://api.coindesk.com/v1/bpi/historical/close.json?start=${start}&end=${end}`)

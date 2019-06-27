@@ -98,7 +98,7 @@ class App extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="currency">Select a cryptocurrency:</label>
-            <select name="currency" value={currency} onChange={this.handleToggle} style={{ margin: "5px" }}>
+            <select name="currency" value={currency} onChange={this.handleChange} style={{ margin: "5px" }}>
               <option value="" hidden>Select one</option>
               <option value="BTC">Bitcoin</option>
             </select>
