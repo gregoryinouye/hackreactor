@@ -4,3 +4,5 @@ This is a project I completed as a student at [hackreactor](http://hackreactor.c
 Challenge 1: Tic Tac Toe
 
 Challenge 2: JSON to CSV
+
+Challenge 3: Multi-page Checkout
