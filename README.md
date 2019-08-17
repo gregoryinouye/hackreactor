@@ -10,3 +10,5 @@ Challenge 3: Multi-page Checkout
 Challenge 4: Connect Four
 
 Bonus Challenge 1: Checkers
+
+Bonus Challenge 2: Battleship
