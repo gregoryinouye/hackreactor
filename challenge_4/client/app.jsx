@@ -6,12 +6,22 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-
+      boardValues: [[0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      ],
     };
   }
 
   render() {
-    return <Board />
+    const { boardValues } = this.state;
+
+    return (
+      <Board boardValues={boardValues} />
+      );
   }
 }
 

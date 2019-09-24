@@ -1,7 +1,7 @@
 import React from 'react';
 import Square from './Square.jsx';
 
-function Board(props) {
+function Board({ boardValues }) {
   return (
     <table style={{borderCollapse: "collapse"}}>
       <thead>
@@ -16,24 +16,11 @@ function Board(props) {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
-        <tr>
-          <Square /><Square /><Square /><Square /><Square /><Square /><Square />
-        </tr>
+        {boardValues.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((square, squareIndex) => (<Square value={row[squareIndex]} key={rowIndex + squareIndex} />))}
+            </tr>
+          ))}
       </tbody>
     </table>
   );
