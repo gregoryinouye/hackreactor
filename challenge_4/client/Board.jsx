@@ -3,7 +3,7 @@ import Square from './Square.jsx';
 
 function Board(props) {
   return (
-    <table>
+    <table style={{borderCollapse: "collapse"}}>
       <thead>
         <tr>
           <th>arrow</th>
