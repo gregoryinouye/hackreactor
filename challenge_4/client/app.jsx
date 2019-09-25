@@ -13,6 +13,7 @@ class App extends React.Component {
                       [0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0],
                       ],
+      playerTurn: 1,
     };
   }
 
