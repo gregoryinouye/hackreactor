@@ -4,17 +4,6 @@ import Square from './Square.jsx';
 function Board({ boardValues, move }) {
   return (
     <table style={{borderCollapse: "collapse"}}>
-      <thead>
-        <tr>
-          <th>arrow</th>
-          <th>arrow</th>
-          <th>arrow</th>
-          <th>arrow</th>
-          <th>arrow</th>
-          <th>arrow</th>
-          <th>arrow</th>
-        </tr>
-      </thead>
       <tbody>
         {boardValues.map((row, rowIndex) => (
             <tr key={rowIndex}>
