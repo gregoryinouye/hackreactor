@@ -16,13 +16,26 @@ class App extends React.Component {
                     ],
       isRedNext: true
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    const col = e.target.parentNode.parentNode.cellIndex;
+    const row = e.target.parentNode.parentNode.parentNode.rowIndex;
+    console.log(col, row);
+  }
+
+  dropToken(col) {
+
   }
 
   render() {
     const { boardValues } = this.state;
 
     return (
-      <Board boardValues={boardValues} />
+      <Board boardValues={boardValues} move={this.handleClick} />
       );
   }
 }
