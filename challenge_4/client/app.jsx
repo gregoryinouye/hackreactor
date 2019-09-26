@@ -6,14 +6,15 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      boardValues: [[0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      ],
-      playerTurn: 1,
+      boardValues: [
+                      [null, null, null, null, null, null, null],
+                      [null, null, null, null, null, null, null],
+                      [null, null, null, null, null, null, null],
+                      [null, null, null, null, null, null, null],
+                      [null, null, null, null, null, null, null],
+                      [null, null, null, null, null, null, null]
+                    ],
+      isRedNext: true
     };
   }
 
