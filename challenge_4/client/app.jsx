@@ -23,12 +23,31 @@ class App extends React.Component {
   handleClick(e) {
     e.preventDefault();
     const col = e.target.parentNode.parentNode.cellIndex;
-    const row = e.target.parentNode.parentNode.parentNode.rowIndex;
-    console.log(col, row);
+    this.dropToken(col);
+  }
+
+  getEmptySquare(col) {
+    const { boardValues } = this.state;
+    for (let row = boardValues.length - 1; row >= 0; row--) {
+      if (!boardValues[row][col]) { 
+        return row;
+      }
+    }
+
+    return -1;
   }
 
   dropToken(col) {
+    const { boardValues, isRedNext } = this.state;
+    let row = this.getEmptySquare(col);
 
+    if (row === -1) {
+      console.error('no available spaces in this column');
+    } else {
+      const postMoveBoard = boardValues.slice();
+      postMoveBoard[row][col] = isRedNext ? 'red' : 'yellow';
+      this.setState({ boardValues: postMoveBoard, isRedNext: !isRedNext });
+    }
   }
 
   render() {
