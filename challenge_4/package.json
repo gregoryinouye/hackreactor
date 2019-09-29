@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "webpack": "webpack"
+    "start": "nodemon server.js",
+    "webpack": "webpack -d -w"
   },
   "babel": {
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
-    ]
+    ],
+    "plugins": ["@babel/plugin-proposal-class-properties"]
   },
   "repository": {
     "type": "git",
