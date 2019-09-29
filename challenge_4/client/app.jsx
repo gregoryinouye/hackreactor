@@ -16,11 +16,9 @@ class App extends React.Component {
                     ],
       isRedNext: true
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
+  handleClick = e => {
     e.preventDefault();
     const col = e.target.parentNode.parentNode.cellIndex;
     this.dropToken(col);
