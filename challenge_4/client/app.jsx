@@ -18,10 +18,17 @@ class App extends React.Component {
     };
   }
 
-  handleClick = e => {
-    e.preventDefault();
-    const col = e.target.parentNode.parentNode.cellIndex;
-    this.dropToken(col);
+  dropToken(col) {
+    const { boardValues, isRedNext } = this.state;
+    let row = this.getEmptySquare(col);
+
+    if (row === -1) {
+      console.error('no available spaces in this column');
+    } else {
+      const postMoveBoard = boardValues.slice();
+      postMoveBoard[row][col] = isRedNext ? 'red' : 'yellow';
+      this.setState({ boardValues: postMoveBoard, isRedNext: !isRedNext });
+    }
   }
 
   getEmptySquare(col) {
@@ -35,17 +42,10 @@ class App extends React.Component {
     return -1;
   }
 
-  dropToken(col) {
-    const { boardValues, isRedNext } = this.state;
-    let row = this.getEmptySquare(col);
-
-    if (row === -1) {
-      console.error('no available spaces in this column');
-    } else {
-      const postMoveBoard = boardValues.slice();
-      postMoveBoard[row][col] = isRedNext ? 'red' : 'yellow';
-      this.setState({ boardValues: postMoveBoard, isRedNext: !isRedNext });
-    }
+  handleClick = e => {
+    e.preventDefault();
+    const col = e.target.parentNode.parentNode.cellIndex;
+    this.dropToken(col);
   }
 
   render() {
