@@ -80,10 +80,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { boardValues } = this.state;
+    const { boardValues, isRedNext } = this.state;
 
     return (
-      <Board boardValues={boardValues} move={this.handleClick} />
+      <div>
+        <h1>Connect Four</h1>
+        <Board boardValues={boardValues} move={this.handleClick} />
+        <p>{isRedNext ? 'Red' : 'Yellow'} to move</p>
+      </div>
     );
   }
 }
