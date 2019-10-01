@@ -18,34 +18,6 @@ class App extends React.Component {
     };
   }
 
-  isWin(board, row, col) {
-    let count = 0;
-    let color = board[row][col];
-    let modifierIndex = 0;
-    const modifiers = [[1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
-
-    let [rowModifier, colModifier] = modifiers[modifierIndex++];
-    let currRow = row + rowModifier;
-    let currCol = col + colModifier;
-
-    while (count < 3 && modifierIndex < 8) {
-      if (currRow < 0 || currRow >= board.length || currCol < 0 || currCol >= board[0].length || !(board[currRow][currCol] === color)) {
-        [rowModifier, colModifier] = modifiers[modifierIndex++];
-        currRow = row + rowModifier;
-        currCol = col + colModifier;
-        if (modifierIndex % 2 === 1) {
-          count = 0;
-        } 
-      } else {
-        count++;
-        currRow += rowModifier;
-        currCol += colModifier;
-      }
-    }
-
-    return count === 3;
-  }
-
   dropToken(col) {
     const { boardValues, isRedNext } = this.state;
     let row = this.getEmptySquare(col);
@@ -79,12 +51,40 @@ class App extends React.Component {
     this.dropToken(col);
   }
 
+  isWin(board, row, col) {
+    let count = 0;
+    let color = board[row][col];
+    let modifierIndex = 0;
+    const modifiers = [[1, 0], [-1, 0], [0, -1], [0, 1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+
+    let [rowModifier, colModifier] = modifiers[modifierIndex++];
+    let currRow = row + rowModifier;
+    let currCol = col + colModifier;
+
+    while (count < 3 && modifierIndex < 8) {
+      if (currRow < 0 || currRow >= board.length || currCol < 0 || currCol >= board[0].length || !(board[currRow][currCol] === color)) {
+        [rowModifier, colModifier] = modifiers[modifierIndex++];
+        currRow = row + rowModifier;
+        currCol = col + colModifier;
+        if (modifierIndex % 2 === 1) {
+          count = 0;
+        } 
+      } else {
+        count++;
+        currRow += rowModifier;
+        currCol += colModifier;
+      }
+    }
+
+    return count === 3;
+  }
+
   render() {
     const { boardValues } = this.state;
 
     return (
       <Board boardValues={boardValues} move={this.handleClick} />
-      );
+    );
   }
 }
 
