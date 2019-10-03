@@ -3,7 +3,10 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/index.jsx';
 
-const initialState = {};
+const initialState = {
+  history: [],
+  isWhiteNext: true,
+};
 
 const middleware = [thunk];
 
