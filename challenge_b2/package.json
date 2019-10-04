@@ -1,0 +1,19 @@
+{
+  "name": "mini-apps-1-battleship",
+  "version": "1.0.0",
+  "description": "Battleship",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregoryinouye/mini-apps-1.git"
+  },
+  "author": "Gregory Inouye",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregoryinouye/mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/gregoryinouye/mini-apps-1#readme"
+}
