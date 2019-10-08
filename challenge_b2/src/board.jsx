@@ -1,14 +1,11 @@
 import React from 'react';
+import Row from './row.jsx';
 
 function Board(props) {
   return (
     <table>
       <tbody>
-        <tr>
-          <td>
-            cell
-          </td>
-        </tr>
+        <Row />
       </tbody>
     </table>
   );
