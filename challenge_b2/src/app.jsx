@@ -6,7 +6,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      board1: [[null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null]
+            ],
+      board2: [[null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null],
+              [null, null, null, null, null, null, null, null, null, null]
+            ]
     };
   }
 
