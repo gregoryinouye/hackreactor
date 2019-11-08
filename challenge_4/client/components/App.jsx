@@ -83,7 +83,7 @@ class App extends React.Component {
     const { boardValues, isRedNext } = this.state;
 
     return (
-      <div>
+      <div className='app'>
         <h1>Connect Four</h1>
         <Board boardValues={boardValues} move={this.handleClick} />
         <p>{isRedNext ? 'Red' : 'Yellow'} to move</p>

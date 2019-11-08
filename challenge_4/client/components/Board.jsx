@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Square from './Square.jsx';
 
 function Board({ boardValues, move }) {
