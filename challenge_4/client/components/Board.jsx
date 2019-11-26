@@ -16,6 +16,6 @@ const Board = (props) => {
       </tbody>
     </table>
   );
-}
+};
 
 export default Board;
