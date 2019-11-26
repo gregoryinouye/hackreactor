@@ -2,9 +2,11 @@ import React from 'react';
 
 import Square from './Square.jsx';
 
-function Board({ boardValues, move }) {
+const Board = (props) => {
+  const { boardValues, move } = props;
+  
   return (
-    <table style={{borderCollapse: "collapse", width: "100%", maxWidth: "896px", backgroundColor: "black"}}>
+    <table className="board" style={{borderCollapse: "collapse", width: "100%", maxWidth: "896px", backgroundColor: "black"}}>
       <tbody>
         {boardValues.map((row, rowIndex) => (
             <tr key={rowIndex}>
