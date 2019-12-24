@@ -1,1 +1,7 @@
-public/app.js
+dist/bundle.js
+
+# MAC OS
+.DS_Store
+
+# packages
+node_modules
