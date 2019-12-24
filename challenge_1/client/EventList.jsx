@@ -21,7 +21,7 @@ const EventList = props => {
       </tr>
       </thead>
       <tbody>
-        {events.map((event, index) => <EventEntry key={index} event={event} />)}
+        {events.map((event, index) => <EventEntry key={event.date + ':' + index} event={event} />)}
       </tbody>
     </table>
   );
