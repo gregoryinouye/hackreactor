@@ -9,7 +9,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>Hello World</div>
+      <div>
+        <h1>Bowling Score Calculator</h1>
+        <br></br>
+        <div className="game" style={{ display: "flex" }}>
+          <div className="frame">
+            <div>
+              extra pins
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
