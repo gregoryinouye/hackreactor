@@ -1,29 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Frame from './Frame';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = (props) => {
+  const initialScore = Array.from({ length: 10 }, () => ({ ball1: null, ball2: null }));
+  const [ scores, setScore ] = useState(initialScore);
 
-    this.state = {
-      scores: [0,0,0,0,0,0,0,0,0,0]
-    };
-  }
-
-  render() {
-    const { scores } = this.state;
-
-    return (
-      <div>
-        <h1>Bowling Score Calculator</h1>
-        <br></br>
-        <div className="game" style={{ display: "flex" }}>
-          {scores.map((score, index) => <Frame score={score} key={index + ':' + score} />)}
-        </div>
+  return (
+    <div>
+      <h1>Bowling Score Calculator</h1>
+      <br></br>
+      <div className="game" style={{ display: "flex" }}>
+        {scores.map(({ ball1, ball2 }, index) => <Frame ball1={ball1} ball2={ball2} key={index + ':' + ball1 + ':' + ball2} />)}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
