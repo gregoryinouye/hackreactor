@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <title>HR@G: Twiddler</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  </head>
+  <body>
+    <header>
+      <h1><a href="index.html">twiddler livestream</a></h1>
+    </header>
+    <article>
+      <script>
+
+        $(document).ready(function(){
+          var $article = $('article');
+          $article.html('');
+          var $aside = $('aside');
+          $aside.html('');
+
+          var displayedTweetIndex = -1;
+
+          var newestTweetIndex;
+
+          var showUserTimeline = function(atUsername) {
+            username = atUsername.slice(1);
+            for (var i = 0; i <= streams.users[username].length; i++) {
+              var tweet = streams.users[username][i];
+              var timeStamp = streams.users[username][i].created_at.toLocaleTimeString();
+              var $tweet = $('<div class=tweet></div>');
+              $tweet.html('<button type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<div class="time">' + timeStamp + '</div>');
+              $tweet.prependTo($aside);
+          }};
+
+          var getTweets = function(startTweet, endTweet) {
+            for (var i = startTweet + 1; i <= endTweet; i++) {
+              var tweet = streams.home[i];
+              var timeStamp = streams.home[i].created_at.toLocaleTimeString();
+              var $tweet = $('<div class=tweet></div>');
+              $tweet.html('<button type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<div class="time">' + timeStamp + '</div>');
+              $tweet.prependTo($article);
+          }};
+
+          var updateTweets = function() {
+            newestTweetIndex = streams.home.length - 1;
+            if (newestTweetIndex !== displayedTweetIndex) {
+              getTweets(displayedTweetIndex, newestTweetIndex);
+              displayedTweetIndex = newestTweetIndex;
+            }
+          };
+
+          $('body').on('click', 'button', function( event ) {
+            showUserTimeline( $( this ).text() );
+          });
+
+          updateTweets();
+
+          setInterval(updateTweets, 1500);
+
+        });
+
+      </script>
+    </article>
+    <aside>
+    </aside>
+  </body>
+</html>
