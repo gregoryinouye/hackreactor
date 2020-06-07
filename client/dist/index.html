@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab:100,300" rel="stylesheet">
+  <title>GitHub Fetcher</title>
+</head>
+<style>
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 50px;
+    font-weight: 100;
+    
+  }
+
+  h4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .repoList {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .repoEntry {
+    margin: 5px;
+    padding: 5px;
+    float: left;
+    width: 350px;
+    height: 100px;
+  }
+
+  .owner_avatar {
+    float: left;
+    margin-right: 10px;
+  }
+
+  .repoData {
+    /* background-color: red; */
+    vertical-align: top;
+    margin-left: 10px;
+  }
+
+  .repoEntryTitle {
+    font-size: 25px;
+  }
+
+  button {
+    margin-left: 8px;
+  }
+</style>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>
