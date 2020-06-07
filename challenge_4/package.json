@@ -1,0 +1,54 @@
+{
+  "name": "connectfour",
+  "version": "1.0.0",
+  "description": "Mini App 4: Connect Four",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --watch",
+    "start": "nodemon server.js",
+    "webpack": "webpack -d -w"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregoryinouye/mini-apps-1.git"
+  },
+  "author": "Gregory Inouye",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregoryinouye/mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/gregoryinouye/mini-apps-1#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "<rootDir>/client/setupTests.js"
+    ]
+  }
+}
