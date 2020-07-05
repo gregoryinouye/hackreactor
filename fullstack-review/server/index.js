@@ -13,7 +13,12 @@ app.post('/repos', urlencodedParser, function (req, res) {
     if (err) {
       console.error(err);
       res.status(404).end();
+      return
     } else {
+      if (JSON.parse(data).message === "Not Found") {
+        res.status(404).end()
+        return
+      }
       let parsedRepos = JSON.parse(data).map(repo => {
         return {
           _id: repo.id,
